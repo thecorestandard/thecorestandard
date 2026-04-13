@@ -1454,10 +1454,11 @@ body{
 <section class="s-cta" id="waitlist">
   <h2 class="s-cta-headline">See what interviews <em>can't.</em></h2>
   <p class="s-cta-sub">The Core Standard launches soon. Waitlist members get 20% off at launch and early input into how the product takes shape.</p>
-  <form class="waitlist-form" onsubmit="event.preventDefault();this.innerHTML='<div style=\'padding:16px;color:var(--orange);font-weight:500\'>You\'re on the list.</div>'">
-    <input type="email" class="waitlist-input" placeholder="Your email address" required>
+  <form class="waitlist-form" action="https://formspree.io/f/xlgaedwk" method="POST" id="waitlistForm">
+    <input type="email" name="email" class="waitlist-input" placeholder="Your email address" required>
     <button type="submit" class="waitlist-btn">Join Waitlist</button>
   </form>
+  <div id="waitlistSuccess" style="display:none;padding:16px;color:var(--orange);font-weight:500;font-size:15px;">You're on the list.</div>
   <p class="s-cta-note">No spam. Just early access, your discount, and launch updates.</p>
 </section>
 
@@ -1484,6 +1485,20 @@ body{
     timer.textContent = m+':'+(s<10?'0':'')+s;
   },1000);
 })();
+
+// Waitlist form submission
+document.getElementById('waitlistForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  var form = this;
+  var data = new FormData(form);
+  fetch(form.action, {method:'POST', body:data, headers:{'Accept':'application/json'}})
+    .then(function(r){
+      if(r.ok){
+        form.style.display='none';
+        document.getElementById('waitlistSuccess').style.display='block';
+      }
+    });
+});
 </script>
 
 </body>
