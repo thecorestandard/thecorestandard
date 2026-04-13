@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Core Standard. | The EA Simulation</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ─── FONT ─── */
+@font-face{
+  font-family:'Angle';
+  src:url('Angle.woff2') format('woff2'), url('Angle.ttf') format('truetype');
+  font-weight:400;
+  font-style:normal;
+  font-display:swap;
+}
+/* ─── RESET & VARIABLES ─── */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --rich-black:#0F0800;
+  --surface:#1A1008;
+  --orange:#EB641E;
+  --orange-light:#F4864E;
+  --orange-dark:#C44F0A;
+  --cream:#FFF8F0;
+  --cream-dark:#F0E4D4;
+  --warm-grey:#BBA898;
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--rich-black);
+  color:var(--cream);
+  font-family:'Poppins',sans-serif;
+  font-weight:300;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ─── TYPOGRAPHY ─── */
+.display{font-family:'Angle','Cormorant Garamond',serif}
+.display-italic{font-family:'Angle','Cormorant Garamond',serif;font-style:italic}
+
+/* ─── FULL-SCREEN SIMULATION HERO ─── */
+.sim-hero{
+  position:relative;
+  width:100%;
+  height:100vh;
+  min-height:700px;
+  display:flex;
+  flex-direction:column;
+  background:var(--rich-black);
+  overflow:hidden;
+}
+
+/* Scanline overlay */
+.sim-hero::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(15,8,0,0.03) 2px,
+    rgba(15,8,0,0.03) 4px
+  );
+  pointer-events:none;
+  z-index:10;
+}
+
+/* Top bar — looks like simulation chrome */
+.sim-topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:16px 32px;
+  border-bottom:1px solid rgba(235,100,30,0.15);
+  z-index:5;
+  opacity:0;
+  animation:fadeIn 0.6s 0.3s forwards;
+}
+.sim-topbar-brand{
+  font-family:'Angle','Cormorant Garamond',serif;
+  font-size:20px;
+  font-weight:600;
+  letter-spacing:0.02em;
+}
+.sim-topbar-brand .core{color:var(--orange)}
+.sim-topbar-brand .standard{color:var(--cream)}
+.sim-topbar-brand .dot{color:var(--orange)}
+
+.sim-topbar-meta{
+  display:flex;
+  align-items:center;
+  gap:24px;
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  color:var(--warm-grey);
+}
+.sim-topbar-status{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.sim-topbar-status::before{
+  content:'';
+  width:6px;height:6px;
+  border-radius:50%;
+  background:var(--orange);
+  animation:pulse 2s infinite;
+}
+.sim-timer-display{
+  font-family:'Poppins',sans-serif;
+  font-size:14px;
+  font-weight:600;
+  color:var(--orange);
+  font-variant-numeric:tabular-nums;
+}
+
+/* Main simulation workspace */
+.sim-workspace{
+  flex:1;
+  display:grid;
+  grid-template-columns:260px 1fr 320px;
+  gap:0;
+  position:relative;
+  z-index:5;
+}
+
+/* Left sidebar — module nav */
+.sim-sidebar{
+  border-right:1px solid rgba(235,100,30,0.1);
+  padding:32px 0;
+  opacity:0;
+  animation:slideRight 0.6s 0.6s forwards;
+}
+.sim-sidebar-label{
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:var(--warm-grey);
+  padding:0 24px;
+  margin-bottom:16px;
+}
+.sim-module-item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:12px 24px;
+  font-size:13px;
+  font-weight:400;
+  color:rgba(255,248,240,0.4);
+  cursor:default;
+  transition:all 0.3s;
+  border-left:2px solid transparent;
+}
+.sim-module-item.active{
+  color:var(--cream);
+  background:rgba(235,100,30,0.06);
+  border-left-color:var(--orange);
+}
+.sim-module-item.completed{
+  color:var(--warm-grey);
+}
+.sim-module-num{
+  width:24px;height:24px;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:10px;
+  font-weight:600;
+  border:1px solid rgba(255,248,240,0.15);
+  flex-shrink:0;
+}
+.sim-module-item.active .sim-module-num{
+  border-color:var(--orange);
+  background:var(--orange);
+  color:var(--rich-black);
+}
+.sim-module-item.completed .sim-module-num{
+  border-color:var(--warm-grey);
+  color:var(--warm-grey);
+}
+
+/* Centre — email/content panel */
+.sim-centre{
+  padding:32px 40px;
+  overflow:hidden;
+  opacity:0;
+  animation:fadeUp 0.8s 0.9s forwards;
+}
+.sim-centre-label{
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:var(--warm-grey);
+  margin-bottom:20px;
+}
+.sim-email-list{display:flex;flex-direction:column;gap:2px}
+
+.sim-email-row{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:16px;
+  padding:14px 16px;
+  border-radius:6px;
+  cursor:default;
+  transition:all 0.3s;
+  opacity:0;
+  transform:translateY(8px);
+}
+.sim-email-row:nth-child(1){animation:emailIn 0.5s 1.2s forwards}
+.sim-email-row:nth-child(2){animation:emailIn 0.5s 1.5s forwards}
+.sim-email-row:nth-child(3){animation:emailIn 0.5s 1.8s forwards}
+.sim-email-row:nth-child(4){animation:emailIn 0.5s 2.1s forwards}
+.sim-email-row:nth-child(5){animation:emailIn 0.5s 2.4s forwards}
+
+.sim-email-row.highlighted{
+  background:rgba(235,100,30,0.08);
+}
+
+.sim-email-sender{
+  font-size:13px;
+  font-weight:500;
+  color:var(--cream);
+  white-space:nowrap;
+}
+.sim-email-subject{
+  font-size:13px;
+  font-weight:300;
+  color:rgba(255,248,240,0.55);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.sim-email-time{
+  font-size:11px;
+  color:var(--warm-grey);
+  white-space:nowrap;
+}
+.sim-email-tag{
+  display:inline-block;
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  padding:2px 8px;
+  border-radius:3px;
+  margin-left:8px;
+}
+.tag-urgent{background:rgba(235,100,30,0.2);color:var(--orange)}
+.tag-flag{background:rgba(187,168,152,0.15);color:var(--warm-grey)}
+
+/* Right panel — context/brief */
+.sim-context{
+  border-left:1px solid rgba(235,100,30,0.1);
+  padding:32px 24px;
+  opacity:0;
+  animation:slideLeft 0.6s 1.0s forwards;
+}
+.sim-context-label{
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:var(--warm-grey);
+  margin-bottom:16px;
+}
+.sim-brief-card{
+  background:rgba(235,100,30,0.04);
+  border:1px solid rgba(235,100,30,0.1);
+  border-radius:8px;
+  padding:20px;
+  margin-bottom:16px;
+}
+.sim-brief-title{
+  font-size:12px;
+  font-weight:600;
+  color:var(--cream);
+  margin-bottom:8px;
+}
+.sim-brief-text{
+  font-size:12px;
+  font-weight:300;
+  color:rgba(255,248,240,0.5);
+  line-height:1.6;
+}
+.sim-brief-detail{
+  display:flex;
+  justify-content:space-between;
+  padding:8px 0;
+  border-bottom:1px solid rgba(255,248,240,0.06);
+  font-size:11px;
+}
+.sim-brief-detail-label{color:var(--warm-grey)}
+.sim-brief-detail-value{color:var(--cream);font-weight:500}
+
+/* ─── THE REVEAL — text overlay that fades in over the simulation ─── */
+.sim-reveal{
+  position:absolute;
+  inset:0;
+  z-index:20;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:40px;
+  opacity:0;
+  animation:revealFade 1.2s 3.8s forwards;
+}
+.sim-reveal::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:radial-gradient(ellipse at center, rgba(15,8,0,0.92) 0%, rgba(15,8,0,0.97) 70%, var(--rich-black) 100%);
+  animation:revealBg 1.2s 3.8s forwards;
+}
+.sim-reveal-content{
+  position:relative;
+  z-index:2;
+  max-width:680px;
+}
+.sim-reveal-hook{
+  font-size:13px;
+  font-weight:500;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:var(--orange);
+  margin-bottom:24px;
+  opacity:0;
+  animation:fadeUp 0.8s 4.4s forwards;
+}
+.sim-reveal-headline{
+  font-family:'Angle','Cormorant Garamond',serif;
+  font-size:clamp(36px,5vw,64px);
+  font-weight:400;
+  line-height:1.15;
+  color:var(--cream);
+  margin-bottom:20px;
+  opacity:0;
+  animation:fadeUp 0.8s 4.7s forwards;
+}
+.sim-reveal-headline em{
+  font-style:italic;
+  color:var(--orange);
+}
+.sim-reveal-sub{
+  font-size:17px;
+  font-weight:300;
+  color:rgba(255,248,240,0.65);
+  line-height:1.6;
+  margin-bottom:36px;
+  opacity:0;
+  animation:fadeUp 0.8s 5.0s forwards;
+}
+.sim-reveal-buttons{
+  display:flex;
+  gap:12px;
+  justify-content:center;
+  flex-wrap:wrap;
+  opacity:0;
+  animation:fadeUp 0.8s 5.3s forwards;
+}
+.sim-reveal-cta{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:14px 36px;
+  background:var(--orange);
+  color:var(--rich-black);
+  font-size:14px;
+  font-weight:600;
+  letter-spacing:0.04em;
+  border-radius:8px;
+  text-decoration:none;
+  transition:all 0.3s;
+}
+.sim-reveal-cta:hover{background:var(--orange-light)}
+.sim-reveal-cta-glass{
+  background:transparent;
+  border:1px solid rgba(255,248,240,0.25);
+  color:var(--cream);
+}
+.sim-reveal-cta-glass:hover{
+  background:rgba(255,248,240,0.08);
+  border-color:rgba(255,248,240,0.4);
+}
+.sim-reveal-scroll{
+  position:absolute;
+  bottom:32px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:var(--warm-grey);
+  opacity:0;
+  animation:fadeIn 0.8s 5.8s forwards;
+  z-index:2;
+}
+.sim-reveal-scroll::after{
+  content:'';
+  display:block;
+  width:1px;height:32px;
+  background:linear-gradient(to bottom,var(--warm-grey),transparent);
+  margin:8px auto 0;
+}
+
+/* ─── SECTION: THE GAP ─── */
+.s-gap{
+  padding:120px 40px;
+  max-width:900px;
+  margin:0 auto;
+  text-align:center;
+}
+.s-gap-label{
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:0.25em;
+  text-transform:uppercase;
+  color:var(--orange);
+  margin-bottom:28px;
+}
+.s-gap-headline{
+  font-family:'Angle','Cormorant Garamond',serif;
+  font-size:clamp(28px,4vw,48px);
+  font-weight:400;
+  line-height:1.2;
+  color:var(--cream);
+  margin-bottom:32px;
+}
+.s-gap-headline em{font-style:italic;color:var(--orange)}
+
+.gap-grid{
+  display:grid;
+  grid-template-columns:1fr 48px 1fr;
+  align-items:start;
+  gap:0;
+  margin:48px 0 0;
+  text-align:left;
+}
+.gap-col{display:flex;flex-direction:column;gap:24px}
+.gap-divider{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding-top:8px;
+}
+.gap-divider-line{
+  width:1px;
+  height:100%;
+  min-height:200px;
+  background:linear-gradient(to bottom,var(--orange),rgba(235,100,30,0.1));
+}
+.gap-item{
+  padding:20px 24px;
+  border-radius:8px;
+}
+.gap-item-label{
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  margin-bottom:8px;
+}
+.gap-interview .gap-item-label{color:var(--warm-grey)}
+.gap-sim .gap-item-label{color:var(--orange)}
+.gap-item-text{
+  font-size:15px;
+  font-weight:300;
+  line-height:1.6;
+  color:rgba(255,248,240,0.7);
+}
+.gap-interview{background:rgba(187,168,152,0.04)}
+.gap-sim{background:rgba(235,100,30,0.04);border:1px solid rgba(235,100,30,0.1)}
+
+/* ─── SECTION: WHAT IT IS ─── */
+.s-what{
+  padding:80px 40px 120px;
+  background:var(--surface);
+  border-top:1px solid rgba(235,100,30,0.08);
+  border-bottom:1px solid rgba(235,100,30,0.08);
+}
+.s-what-inner{
+  max-width:1000px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px;
+  align-items:center;
+}
+.s-what-text{}
+.s-what-label{
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:0.25em;
+  text-transform:uppercase;
+  color:var(--orange);
+  margin-bottom:20px;
+}
+.s-what-title{
+  font-family:'Angle','Cormorant Garamond',serif;
+  font-size:clamp(28px,3.5vw,42px);
+  font-weight:400;
+  line-height:1.2;
+  color:var(--cream);
+  margin-bottom:20px;
+}
+.s-what-title em{font-style:italic;color:var(--orange)}
+.s-what-desc{
+  font-size:15px;
+  font-weight:300;
+  line-height:1.7;
+  color:rgba(255,248,240,0.65);
+  margin-bottom:16px;
+}
+.s-what-facts{
+  display:flex;
+  flex-direction:column;
+  gap:0;
+  border-top:1px solid rgba(235,100,30,0.12);
+  margin-top:32px;
+}
+.s-what-fact{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  padding:16px 0;
+  border-bottom:1px solid rgba(235,100,30,0.08);
+}
+.s-what-fact-num{
+  font-family:'Angle','Cormorant Garamond',serif;
+  font-size:28px;
+  font-weight:600;
+  color:var(--orange);
+  min-width:48px;
+}
+.s-what-fact-text{
+  font-size:14px;
+  font-weight:400;
+  color:rgba(255,248,240,0.7);
+}
+
+/* Visual card on the right */
+.s-what-visual{
+  position:relative;
+}
+.sim-mini{
+  background:var(--rich-black);
+  border:1px solid rgba(235,100,30,0.15);
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 32px 64px rgba(0,0,0,0.5);
+}
+.sim-mini-bar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:12px 16px;
+  border-bottom:1px solid rgba(235,100,30,0.1);
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--warm-grey);
+}
+.sim-mini-timer{color:var(--orange);font-size:13px;letter-spacing:0}
+.sim-mini-body{padding:20px}
+.sim-mini-prompt{
+  font-size:12px;
+  font-weight:500;
+  color:var(--cream);
+  margin-bottom:16px;
+}
+.sim-mini-option{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  padding:12px 14px;
+  border-radius:6px;
+  margin-bottom:6px;
+  background:rgba(255,248,240,0.02);
+  border:1px solid rgba(255,248,240,0.06);
+  transition:all 0.3s;
+}
+.sim-mini-option.selected{
+  background:rgba(235,100,30,0.08);
+  border-color:rgba(235,100,30,0.3);
+}
+.sim-mini-letter{
+  width:22px;height:22px;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:10px;font-weight:600;
+  border:1px solid rgba(255,248,240,0.15);
+  color:var(--warm-grey);
+  flex-shrink:0;
+}
+.sim-mini-option.selected .sim-mini-letter{
+  border-color:var(--orange);
+  background:var(--orange);
+  color:var(--rich-black);
+}
+.sim-mini-option-text{
+  font-size:12px;
+  font-weight:300;
+  color:rgba(255,248,240,0.55);
+  line-height:1.5;
+}
+.sim-mini-option.selected .sim-mini-option-text{color:var(--cream)}
+.sim-mini-followup{
+  margin-top:16px;
+  padding:14px;
+  background:rgba(235,100,30,0.04);
+  border-radius:6px;
+  border:1px solid rgba(235,100,30,0.1);
+}
+.sim-mini-followup-label{
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  color:var(--orange);
+  margin-bottom:6px;
+}
+.sim-mini-followup-text{
+  font-size:11px;
+  font-weight:300;
+  color:rgba(255,248,240,0.45);
+  line-height:1.5;
+  font-style:italic;
+}
+
+/* ─── SECTION: WAITLIST CTA ─── */
+.s-cta{
+  padding:120px 40px;
+  text-align:center;
+  position:relative;
+}
+.s-cta::before{
+  content:'';
+  position:absolute;
+  top:0;left:50%;
+  transform:translateX(-50%);
+  width:1px;height:80px;
+  background:linear-gradient(to bottom,transparent,var(--orange));
+}
+.s-cta-headline{
+  font-family:'Angle','Cormorant Garamond',serif;
+  font-size:clamp(28px,4vw,48px);
+  font-weight:400;
+  line-height:1.2;
+  color:var(--cream);
+  margin-bottom:16px;
+}
+.s-cta-headline em{font-style:italic;color:var(--orange)}
+.s-cta-sub{
+  font-size:15px;
+  font-weight:300;
+  color:rgba(255,248,240,0.55);
+  max-width:500px;
+  margin:0 auto 40px;
+  line-height:1.6;
+}
+.waitlist-form{
+  display:flex;
+  gap:0;
+  max-width:480px;
+  margin:0 auto;
+  border-radius:8px;
+  overflow:hidden;
+  border:1px solid rgba(235,100,30,0.2);
+}
+.waitlist-input{
+  flex:1;
+  padding:16px 20px;
+  background:var(--surface);
+  border:none;
+  color:var(--cream);
+  font-family:'Poppins',sans-serif;
+  font-size:14px;
+  font-weight:300;
+  outline:none;
+}
+.waitlist-input::placeholder{color:var(--warm-grey)}
+.waitlist-btn{
+  padding:16px 28px;
+  background:var(--orange);
+  color:var(--rich-black);
+  font-family:'Poppins',sans-serif;
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:0.04em;
+  border:none;
+  cursor:pointer;
+  transition:background 0.3s;
+  white-space:nowrap;
+}
+.waitlist-btn:hover{background:var(--orange-light)}
+
+.s-cta-note{
+  font-size:12px;
+  color:var(--warm-grey);
+  margin-top:16px;
+}
+
+/* ─── FOOTER ─── */
+.s-footer{
+  padding:40px;
+  border-top:1px solid rgba(235,100,30,0.08);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  max-width:1200px;
+  margin:0 auto;
+}
+.s-footer-brand{
+  font-family:'Angle','Cormorant Garamond',serif;
+  font-size:16px;
+  font-weight:600;
+}
+.s-footer-brand .the{color:var(--warm-grey);font-size:13px}
+.s-footer-brand .core{color:var(--orange)}
+.s-footer-brand .dot{color:var(--orange)}
+.s-footer-text{
+  font-size:11px;
+  color:var(--warm-grey);
+}
+.s-footer-creators{
+  font-size:11px;
+  color:var(--warm-grey);
+}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideRight{from{opacity:0;transform:translateX(-20px)}to{opacity:1;transform:translateX(0)}}
+@keyframes slideLeft{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+@keyframes emailIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes revealFade{from{opacity:0}to{opacity:1}}
+@keyframes revealBg{from{opacity:0}to{opacity:1}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+@keyframes cursorBlink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* Typing cursor */
+.typing-cursor{
+  display:inline-block;
+  width:1px;height:14px;
+  background:var(--orange);
+  margin-left:2px;
+  animation:cursorBlink 1s infinite;
+  vertical-align:middle;
+}
+
+/* ─── SECTION: HOW IT WORKS ─── */
+.s-how{
+  padding:100px 40px;
+  background:var(--surface);
+  border-top:1px solid rgba(235,100,30,0.08);
+  border-bottom:1px solid rgba(235,100,30,0.08);
+}
+.s-how-inner{
+  max-width:800px;
+  margin:0 auto;
+  text-align:center;
+}
+.s-how-label{
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:0.25em;
+  text-transform:uppercase;
+  color:var(--orange);
+  margin-bottom:24px;
+}
+.s-how-headline{
+  font-family:'Angle','Cormorant Garamond',serif;
+  font-size:clamp(26px,3.5vw,40px);
+  font-weight:400;
+  line-height:1.25;
+  color:var(--cream);
+  margin-bottom:20px;
+}
+.s-how-headline em{font-style:italic;color:var(--orange)}
+.s-how-sub{
+  font-size:15px;
+  font-weight:300;
+  line-height:1.7;
+  color:rgba(255,248,240,0.55);
+  max-width:640px;
+  margin:0 auto 48px;
+}
+.s-how-steps{
+  display:flex;
+  flex-direction:column;
+  gap:0;
+  text-align:left;
+  max-width:560px;
+  margin:0 auto;
+}
+.s-how-step{
+  display:flex;
+  align-items:flex-start;
+  gap:20px;
+  padding:20px 0;
+  border-bottom:1px solid rgba(235,100,30,0.08);
+}
+.s-how-step:last-child{border-bottom:none}
+.s-how-step-num{
+  width:32px;height:32px;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:600;
+  border:1px solid rgba(235,100,30,0.3);
+  color:var(--orange);
+  flex-shrink:0;
+  margin-top:2px;
+}
+.s-how-step-title{
+  font-size:14px;
+  font-weight:600;
+  color:var(--cream);
+  margin-bottom:4px;
+}
+.s-how-step-text{
+  font-size:13px;
+  font-weight:300;
+  color:rgba(255,248,240,0.5);
+  line-height:1.5;
+}
+
+/* ─── SECTION: FOR CANDIDATES ─── */
+.s-candidates{
+  padding:100px 40px;
+  background:var(--rich-black);
+  border-top:1px solid rgba(235,100,30,0.08);
+}
+.s-candidates-inner{
+  max-width:1000px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px;
+  align-items:center;
+}
+.s-candidates-label{
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:0.25em;
+  text-transform:uppercase;
+  color:var(--orange);
+  margin-bottom:20px;
+}
+.s-candidates-title{
+  font-family:'Angle','Cormorant Garamond',serif;
+  font-size:clamp(28px,3.5vw,42px);
+  font-weight:400;
+  line-height:1.2;
+  color:var(--cream);
+  margin-bottom:20px;
+}
+.s-candidates-title em{font-style:italic;color:var(--orange)}
+.s-candidates-desc{
+  font-size:15px;
+  font-weight:300;
+  line-height:1.7;
+  color:rgba(255,248,240,0.65);
+  margin-bottom:16px;
+}
+.s-candidates-steps{
+  margin-top:32px;
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+.s-candidates-step{
+  display:flex;
+  align-items:flex-start;
+  gap:16px;
+}
+.s-candidates-step-num{
+  width:28px;height:28px;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:600;
+  background:var(--orange);
+  color:var(--rich-black);
+  flex-shrink:0;
+  margin-top:2px;
+}
+.s-candidates-step-text{
+  font-size:14px;
+  font-weight:300;
+  color:rgba(255,248,240,0.7);
+  line-height:1.6;
+}
+.s-candidates-step-text strong{font-weight:600;color:var(--cream)}
+
+/* Recruiter summary card */
+.recruiter-summary-card{
+  background:var(--surface);
+  border:1px solid rgba(235,100,30,0.15);
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 32px 64px rgba(0,0,0,0.4);
+}
+.rs-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px 20px;
+  border-bottom:1px solid rgba(235,100,30,0.1);
+}
+.rs-brand{
+  font-family:'Angle','Cormorant Garamond',serif;
+  font-size:16px;
+  font-weight:600;
+  color:var(--cream);
+}
+.rs-type{
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  color:var(--warm-grey);
+}
+.rs-candidate{
+  padding:20px 20px 12px;
+}
+.rs-name{
+  font-size:16px;
+  font-weight:600;
+  color:var(--cream);
+  margin-bottom:4px;
+}
+.rs-meta{
+  font-size:11px;
+  color:var(--warm-grey);
+}
+.rs-rating{
+  padding:0 20px 16px;
+}
+.rs-rating-label{
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--warm-grey);
+  margin-bottom:6px;
+}
+.rs-rating-badge{
+  display:inline-block;
+  padding:6px 14px;
+  background:rgba(235,100,30,0.12);
+  border:1px solid rgba(235,100,30,0.25);
+  border-radius:6px;
+  font-size:13px;
+  font-weight:600;
+  color:var(--orange);
+}
+.rs-scores{
+  padding:0 20px 20px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.rs-score-row{
+  display:grid;
+  grid-template-columns:100px 1fr 36px;
+  align-items:center;
+  gap:12px;
+}
+.rs-score-label{
+  font-size:11px;
+  color:var(--warm-grey);
+}
+.rs-score-bar{
+  height:6px;
+  background:rgba(255,248,240,0.06);
+  border-radius:3px;
+  overflow:hidden;
+}
+.rs-score-fill{
+  height:100%;
+  background:var(--orange);
+  border-radius:3px;
+}
+.rs-score-val{
+  font-size:12px;
+  font-weight:600;
+  color:var(--cream);
+  text-align:right;
+}
+.rs-footer{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:14px 20px;
+  border-top:1px solid rgba(235,100,30,0.1);
+  background:rgba(235,100,30,0.03);
+}
+.rs-share-icon{
+  font-size:14px;
+  color:var(--orange);
+}
+.rs-share-text{
+  font-size:11px;
+  color:var(--warm-grey);
+}
+
+/* ─── SECTION: CREDENTIALS ─── */
+.s-credentials{
+  padding:80px 40px;
+  text-align:center;
+  border-top:1px solid rgba(235,100,30,0.08);
+  background:var(--surface);
+}
+.s-credentials-inner{
+  max-width:720px;
+  margin:0 auto;
+}
+.s-credentials-label{
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:0.25em;
+  text-transform:uppercase;
+  color:var(--orange);
+  margin-bottom:24px;
+}
+.s-credentials-headline{
+  font-family:'Angle','Cormorant Garamond',serif;
+  font-size:clamp(22px,3vw,32px);
+  font-weight:400;
+  font-style:italic;
+  line-height:1.4;
+  color:var(--cream);
+  margin-bottom:20px;
+}
+.s-credentials-text{
+  font-size:15px;
+  font-weight:300;
+  line-height:1.7;
+  color:rgba(255,248,240,0.55);
+}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:900px){
+  .sim-workspace{
+    grid-template-columns:1fr;
+  }
+  .sim-sidebar,.sim-context{display:none}
+  .sim-centre{padding:24px}
+  .sim-reveal-headline{font-size:32px}
+  .gap-grid{
+    grid-template-columns:1fr;
+    gap:16px;
+  }
+  .gap-divider{display:none}
+  .s-what-inner{
+    grid-template-columns:1fr;
+    gap:48px;
+  }
+  .s-candidates-inner{
+    grid-template-columns:1fr;
+    gap:48px;
+  }
+  .s-footer{
+    flex-direction:column;
+    gap:12px;
+    text-align:center;
+  }
+  .waitlist-form{
+    flex-direction:column;
+    border-radius:8px;
+  }
+  .waitlist-btn{border-radius:0 0 8px 8px}
+}
+@media(max-width:600px){
+  .sim-topbar{padding:12px 16px}
+  .sim-centre{padding:16px}
+  .s-gap,.s-cta{padding:80px 24px}
+  .s-how,.s-what,.s-candidates{padding:60px 24px}
+  .s-credentials{padding:60px 24px}
+}
+</style>
+</head>
+<body>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     HERO: Full-screen simulation — you've sat down at the desk
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section class="sim-hero">
+
+  <!-- Simulation top bar -->
+  <div class="sim-topbar">
+    <div class="sim-topbar-brand">
+      <span class="core">Core</span> <span class="standard">Standard</span><span class="dot">.</span>
+    </div>
+    <div class="sim-topbar-meta">
+      <span>Level 2 · Director EA</span>
+      <div class="sim-topbar-status">Simulation Active</div>
+      <span class="sim-timer-display" id="heroTimer">47:12</span>
+    </div>
+  </div>
+
+  <!-- Three-panel workspace -->
+  <div class="sim-workspace">
+
+    <!-- Left: Module navigation -->
+    <div class="sim-sidebar">
+      <div class="sim-sidebar-label">Modules</div>
+      <div class="sim-module-item completed">
+        <div class="sim-module-num">&#10003;</div>
+        <span>Scenario Brief</span>
+      </div>
+      <div class="sim-module-item active">
+        <div class="sim-module-num">2</div>
+        <span>Inbox Triage</span>
+      </div>
+      <div class="sim-module-item">
+        <div class="sim-module-num">3</div>
+        <span>Priority Ranking</span>
+      </div>
+      <div class="sim-module-item">
+        <div class="sim-module-num">4</div>
+        <span>Stakeholder Dilemma</span>
+      </div>
+      <div class="sim-module-item">
+        <div class="sim-module-num">5</div>
+        <span>Written Response</span>
+      </div>
+      <div class="sim-module-item">
+        <div class="sim-module-num">6</div>
+        <span>Mindset &amp; Instinct</span>
+      </div>
+    </div>
+
+    <!-- Centre: Inbox -->
+    <div class="sim-centre">
+      <div class="sim-centre-label">Inbox · 5 new messages</div>
+      <div class="sim-email-list">
+        <div class="sim-email-row highlighted">
+          <div class="sim-email-sender">Claire Hadley, CFO <span class="sim-email-tag tag-urgent">Urgent</span></div>
+          <div class="sim-email-subject">Q2 budget sign-off: board pack prints at 4pm today</div>
+          <div class="sim-email-time">9:02 AM</div>
+        </div>
+        <div class="sim-email-row">
+          <div class="sim-email-sender">Rachel Trent, EA to CEO</div>
+          <div class="sim-email-subject">Heads up: James may call about Friday, don't commit to anything yet</div>
+          <div class="sim-email-time">9:14 AM</div>
+        </div>
+        <div class="sim-email-row">
+          <div class="sim-email-sender">David Keane, Senior Surveyor</div>
+          <div class="sim-email-subject">Quick one: can you move my 2pm to Thursday?</div>
+          <div class="sim-email-time">9:21 AM</div>
+        </div>
+        <div class="sim-email-row">
+          <div class="sim-email-sender">Sophie Hartwell, Managing Partner <span class="sim-email-tag tag-flag">Principal</span></div>
+          <div class="sim-email-subject">I've changed my mind on the venue. Call me when you're free.</div>
+          <div class="sim-email-time">9:33 AM</div>
+        </div>
+        <div class="sim-email-row">
+          <div class="sim-email-sender">IT Service Desk</div>
+          <div class="sim-email-subject">Laptop migration scheduled for 2:00 PM. Please save all open work</div>
+          <div class="sim-email-time">9:40 AM</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Context panel -->
+    <div class="sim-context">
+      <div class="sim-context-label">Scenario Brief</div>
+      <div class="sim-brief-card">
+        <div class="sim-brief-title">The Hartwell Group</div>
+        <div class="sim-brief-text">You are EA to Sophie Hartwell, Managing Partner. She is in back-to-back client meetings until 3pm. You are her filter, her memory, and her judgment when she's unavailable.</div>
+      </div>
+      <div class="sim-brief-detail">
+        <span class="sim-brief-detail-label">Your principal</span>
+        <span class="sim-brief-detail-value">Sophie Hartwell</span>
+      </div>
+      <div class="sim-brief-detail">
+        <span class="sim-brief-detail-label">Availability</span>
+        <span class="sim-brief-detail-value">Unavailable until 3pm</span>
+      </div>
+      <div class="sim-brief-detail">
+        <span class="sim-brief-detail-label">Today's priority</span>
+        <span class="sim-brief-detail-value">Q2 board pack</span>
+      </div>
+      <div class="sim-brief-detail">
+        <span class="sim-brief-detail-label">Time remaining</span>
+        <span class="sim-brief-detail-value" style="color:var(--orange)">47:12</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE REVEAL — fades in over the simulation -->
+  <div class="sim-reveal">
+    <div class="sim-reveal-content">
+      <div class="sim-reveal-hook">This is not an interview</div>
+      <h1 class="sim-reveal-headline">Interviews show you who <em>presents</em> well.<br>This shows you who <em>performs.</em></h1>
+      <p class="sim-reveal-sub">The Core Standard is an online simulation of a realistic EA working day. Employers use it to see how candidates actually think before hiring. EAs use it to prove what interviews never capture.</p>
+      <p class="sim-reveal-early" style="font-size:13px;color:var(--orange);font-weight:500;margin-bottom:28px;opacity:0;animation:fadeUp 0.8s 5.1s forwards;">Join the waitlist for 20% off at launch + help shape the product.</p>
+      <div class="sim-reveal-buttons">
+        <a href="#for-employers" class="sim-reveal-cta">I'm Hiring an EA</a>
+        <a href="#for-eas" class="sim-reveal-cta sim-reveal-cta-glass">I'm an EA</a>
+      </div>
+    </div>
+    <div class="sim-reveal-scroll">Scroll</div>
+  </div>
+
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     THE GAP: What interviews can't show you
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section class="s-gap">
+  <div class="s-gap-label">The Problem</div>
+  <h2 class="s-gap-headline">A candidate can interview <em>beautifully</em> and fall apart in the first week.</h2>
+
+  <div class="gap-grid">
+    <!-- Interviews column -->
+    <div class="gap-col">
+      <div class="gap-item gap-interview">
+        <div class="gap-item-label">What interviews test</div>
+        <div class="gap-item-text">Confidence. Presentation. Rehearsed answers to predictable questions.</div>
+      </div>
+      <div class="gap-item gap-interview">
+        <div class="gap-item-label">What CVs show</div>
+        <div class="gap-item-text">Where someone has been. Titles they've held. Nothing about how they actually operated.</div>
+      </div>
+      <div class="gap-item gap-interview">
+        <div class="gap-item-label">What you're left with</div>
+        <div class="gap-item-text">A gut feeling. Three months to find out if it was right.</div>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="gap-divider">
+      <div class="gap-divider-line"></div>
+    </div>
+
+    <!-- Simulation column -->
+    <div class="gap-col">
+      <div class="gap-item gap-sim">
+        <div class="gap-item-label">What the simulation captures</div>
+        <div class="gap-item-text">Priority logic. Discretion under pressure. The instinct to protect your principal's time without being told to.</div>
+      </div>
+      <div class="gap-item gap-sim">
+        <div class="gap-item-label">What you actually see</div>
+        <div class="gap-item-text">How they triage when everything is urgent. Whether they escalate or absorb. How they write when it matters.</div>
+      </div>
+      <div class="gap-item gap-sim">
+        <div class="gap-item-label">What you walk away with</div>
+        <div class="gap-item-text">A detailed competency report. Scored. Benchmarked. Before you've spent a single hour interviewing.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     HOW IT WORKS: The mechanics in plain English
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section class="s-how">
+  <div class="s-how-inner">
+    <div class="s-how-label">How It Works</div>
+    <h2 class="s-how-headline">An online simulation of a <em>realistic</em> EA working day.</h2>
+    <p class="s-how-sub">A candidate receives a scenario brief: a company, a principal, a day that's already in motion. Emails land. Priorities collide. Stakeholders need answers. The clock is ticking. There are no "right" answers. We capture approach, judgment, composure, and communication.</p>
+    <div class="s-how-steps">
+      <div class="s-how-step">
+        <div class="s-how-step-num">1</div>
+        <div class="s-how-step-content">
+          <div class="s-how-step-title">Inbox Triage</div>
+          <div class="s-how-step-text">Conflicting emails arrive. What's truly urgent vs what just feels urgent?</div>
+        </div>
+      </div>
+      <div class="s-how-step">
+        <div class="s-how-step-num">2</div>
+        <div class="s-how-step-content">
+          <div class="s-how-step-title">Priority Ranking</div>
+          <div class="s-how-step-text">Competing demands. Rank them. Then explain the logic.</div>
+        </div>
+      </div>
+      <div class="s-how-step">
+        <div class="s-how-step-num">3</div>
+        <div class="s-how-step-content">
+          <div class="s-how-step-title">Stakeholder Dilemma</div>
+          <div class="s-how-step-text">Your principal's instruction conflicts with an opportunity. Choose. Justify.</div>
+        </div>
+      </div>
+      <div class="s-how-step">
+        <div class="s-how-step-num">4</div>
+        <div class="s-how-step-content">
+          <div class="s-how-step-title">Written Communication</div>
+          <div class="s-how-step-text">Draft a response under pressure. Tone matters. Clarity matters more.</div>
+        </div>
+      </div>
+      <div class="s-how-step">
+        <div class="s-how-step-num">5</div>
+        <div class="s-how-step-content">
+          <div class="s-how-step-title">Mindset &amp; Instinct</div>
+          <div class="s-how-step-text">How do they think about the role? What drives their decisions?</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     FOR EMPLOYERS
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section class="s-what" id="for-employers">
+  <div class="s-what-inner">
+    <div class="s-what-text">
+      <div class="s-what-label">For Employers</div>
+      <h2 class="s-what-title">Send a link. Get a <em>competency report.</em></h2>
+      <p class="s-what-desc">You send a candidate the simulation link. They complete it online. You receive a detailed report, scored across priority logic, discretion, ownership, and composure, before you've spent a single hour interviewing.</p>
+      <p class="s-what-desc">No more relying on gut feeling. No more polished interviewers who fall apart in week one. You see how they actually think.</p>
+      <div class="s-what-facts">
+        <div class="s-what-fact">
+          <div class="s-what-fact-num">6</div>
+          <div class="s-what-fact-text">Modules per simulation, from inbox triage to stakeholder dilemmas</div>
+        </div>
+        <div class="s-what-fact">
+          <div class="s-what-fact-num">4</div>
+          <div class="s-what-fact-text">Competencies scored: priority logic, discretion, ownership, composure</div>
+        </div>
+        <div class="s-what-fact">
+          <div class="s-what-fact-num">30</div>
+          <div class="s-what-fact-text">Years of EA placement experience behind every scenario</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mini simulation preview -->
+    <div class="s-what-visual">
+      <div class="sim-mini">
+        <div class="sim-mini-bar">
+          <span>Module 4 · Stakeholder Dilemma</span>
+          <span class="sim-mini-timer">31:44</span>
+        </div>
+        <div class="sim-mini-body">
+          <div class="sim-mini-prompt">Your principal said: "Don't let anyone into my diary this week." The CEO's EA has just called. The CEO wants 30 minutes tomorrow. It's clearly important.</div>
+          <div class="sim-mini-option">
+            <div class="sim-mini-letter">A</div>
+            <div class="sim-mini-option-text">Protect the diary. The principal's instruction is absolute.</div>
+          </div>
+          <div class="sim-mini-option selected">
+            <div class="sim-mini-letter">B</div>
+            <div class="sim-mini-option-text">Offer the CEO's EA two options outside this week, but flag the request to your principal at the next break.</div>
+          </div>
+          <div class="sim-mini-option">
+            <div class="sim-mini-letter">C</div>
+            <div class="sim-mini-option-text">Book it in. The CEO outranks your principal. This takes priority.</div>
+          </div>
+          <div class="sim-mini-followup">
+            <div class="sim-mini-followup-label">Now explain your reasoning</div>
+            <div class="sim-mini-followup-text">"I'd protect Sophie's boundary while keeping the door open. The CEO's request matters, but Sophie told me no meetings, and she trusts me to hold that line..."<span class="typing-cursor"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     FOR EAs: Self-assessment
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section class="s-candidates" id="for-eas">
+  <div class="s-candidates-inner">
+    <div class="s-candidates-text">
+      <div class="s-candidates-label">For EAs</div>
+      <h2 class="s-candidates-title">Prove it before the <em>interview.</em></h2>
+      <p class="s-candidates-desc">You don't need an employer to send you this. Take the simulation yourself, receive a full competency report, and get a recruiter summary. A one-page credential you can attach to applications or share with any recruiter or hiring manager.</p>
+      <p class="s-candidates-desc">Every CV says "proactive, discreet, detail-oriented." This is the proof.</p>
+      <div class="s-candidates-steps">
+        <div class="s-candidates-step">
+          <div class="s-candidates-step-num">1</div>
+          <div class="s-candidates-step-text"><strong>Take the simulation</strong> online, in your own time</div>
+        </div>
+        <div class="s-candidates-step">
+          <div class="s-candidates-step-num">2</div>
+          <div class="s-candidates-step-text"><strong>Get your report</strong> scored across priority logic, discretion, ownership, and composure</div>
+        </div>
+        <div class="s-candidates-step">
+          <div class="s-candidates-step-num">3</div>
+          <div class="s-candidates-step-text"><strong>Share your recruiter summary</strong> attach it to direct applications or send it to any recruiter alongside your CV</div>
+        </div>
+      </div>
+    </div>
+    <div class="s-candidates-visual">
+      <div class="recruiter-summary-card">
+        <div class="rs-header">
+          <div class="rs-brand"><span style="color:var(--orange)">Core</span> Standard<span style="color:var(--orange)">.</span></div>
+          <div class="rs-type">Recruiter Summary</div>
+        </div>
+        <div class="rs-candidate">
+          <div class="rs-name">Alexandra Chen</div>
+          <div class="rs-meta">TCS Certified · Level 2 (Director EA)</div>
+        </div>
+        <div class="rs-rating">
+          <div class="rs-rating-label">Overall Rating</div>
+          <div class="rs-rating-badge">Strong Core Fit</div>
+        </div>
+        <div class="rs-scores">
+          <div class="rs-score-row">
+            <span class="rs-score-label">Priority Logic</span>
+            <div class="rs-score-bar"><div class="rs-score-fill" style="width:88%"></div></div>
+            <span class="rs-score-val">8.8</span>
+          </div>
+          <div class="rs-score-row">
+            <span class="rs-score-label">Discretion</span>
+            <div class="rs-score-bar"><div class="rs-score-fill" style="width:82%"></div></div>
+            <span class="rs-score-val">8.2</span>
+          </div>
+          <div class="rs-score-row">
+            <span class="rs-score-label">Ownership</span>
+            <div class="rs-score-bar"><div class="rs-score-fill" style="width:91%"></div></div>
+            <span class="rs-score-val">9.1</span>
+          </div>
+          <div class="rs-score-row">
+            <span class="rs-score-label">Composure</span>
+            <div class="rs-score-bar"><div class="rs-score-fill" style="width:85%"></div></div>
+            <span class="rs-score-val">8.5</span>
+          </div>
+        </div>
+        <div class="rs-footer">
+          <div class="rs-share-icon">&#9741;</div>
+          <div class="rs-share-text">Shareable with employers &amp; recruiters</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     CREDENTIALS
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section class="s-credentials">
+  <div class="s-credentials-inner">
+    <div class="s-credentials-label">Built by practitioners</div>
+    <h2 class="s-credentials-headline">Created by Lily Shippen &amp; Emily Partridge. Nearly 30 years on both sides of the EA desk.</h2>
+    <p class="s-credentials-text">Lily Shippen is the UK's leading specialist EA recruiter. Emily Partridge has managed and trained executive support teams at the highest level. Every scenario in The Core Standard is drawn from what they've actually seen: the judgment calls, the pressure points, the moments that separate good from exceptional.</p>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     WAITLIST CTA
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section class="s-cta" id="waitlist">
+  <h2 class="s-cta-headline">See what interviews <em>can't.</em></h2>
+  <p class="s-cta-sub">The Core Standard launches soon. Waitlist members get 20% off at launch and early input into how the product takes shape.</p>
+  <form class="waitlist-form" onsubmit="event.preventDefault();this.innerHTML='<div style=\'padding:16px;color:var(--orange);font-weight:500\'>You\'re on the list.</div>'">
+    <input type="email" class="waitlist-input" placeholder="Your email address" required>
+    <button type="submit" class="waitlist-btn">Join Waitlist</button>
+  </form>
+  <p class="s-cta-note">No spam. Just early access, your discount, and launch updates.</p>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     FOOTER
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<footer class="s-footer">
+  <div class="s-footer-brand">
+    <span class="the">The </span><span class="core">Core</span> Standard<span class="dot">.</span>
+  </div>
+  <div class="s-footer-creators">Created by Lily Shippen & Emily Partridge</div>
+  <div class="s-footer-text">&copy; 2026 The Core Standard. All rights reserved.</div>
+</footer>
+
+<!-- ━━━ Timer countdown ━━━ -->
+<script>
+(function(){
+  let seconds = 47*60+12;
+  const timer = document.getElementById('heroTimer');
+  setInterval(()=>{
+    if(seconds>0) seconds--;
+    const m = Math.floor(seconds/60);
+    const s = seconds%60;
+    timer.textContent = m+':'+(s<10?'0':'')+s;
+  },1000);
+})();
+</script>
+
+</body>
+</html>
