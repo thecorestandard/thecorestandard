@@ -3,8 +3,54 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Core Standard. | The EA Simulation</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>The Core Standard | The scenario-based EA &amp; PA assessment</title>
+
+<!-- SEO -->
+<meta name="description" content="See how an EA or Private PA actually performs before you hire them. The Core Standard is a realistic, scored assessment of a real working day. Join the waitlist for early access and 20% off at launch.">
+<meta name="author" content="Lily Shippen &amp; Emily Partridge">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.thecorestandard.co.uk/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="See how an EA actually performs before you hire them.">
+<meta property="og:description" content="The Core Standard is a realistic, scored assessment of a real working day. Employers use it to hire with confidence; EAs and PAs use it to prove how good they are. Join the waitlist — 20% off at launch.">
+<meta property="og:url" content="https://www.thecorestandard.co.uk/">
+<meta property="og:site_name" content="The Core Standard">
+<meta property="og:locale" content="en_GB">
+<meta property="og:image" content="https://www.thecorestandard.co.uk/og-home.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Core Standard. The scenario-based executive assistant assessment.">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="See how an EA actually performs before you hire them.">
+<meta name="twitter:description" content="A realistic, scored assessment of a real working day. Join the waitlist — 20% off at launch.">
+<meta name="twitter:image" content="https://www.thecorestandard.co.uk/og-home.png">
+
+<link rel="icon" type="image/png" href="tcs-favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Organization",
+ "name": "The Core Standard",
+ "url": "https://www.thecorestandard.co.uk/",
+ "slogan": "The benchmark. Not the average.",
+ "description": "The scenario-based assessment for Executive Assistants and Private PAs. Expert-reviewed reports for hiring and certification.",
+ "founder": [
+  { "@type": "Person", "name": "Lily Shippen", "url": "https://www.lilyshippen.co.uk" },
+  { "@type": "Person", "name": "Emily Partridge", "url": "https://www.eavolve.co.uk" }
+ ],
+ "parentOrganization": { "@type": "Organization", "name": "eavolve Ltd" },
+ "sameAs": [ "https://www.linkedin.com/company/the-core-standard/" ]
+}
+</script>
+
 <style>
 /* ─── FONT ─── */
 @font-face{
@@ -324,7 +370,7 @@ body{
 .sim-reveal-content{
   position:relative;
   z-index:2;
-  max-width:680px;
+  max-width:720px;
 }
 .sim-reveal-hook{
   font-size:13px;
@@ -355,15 +401,27 @@ body{
   font-weight:300;
   color:rgba(255,248,240,0.82);
   line-height:1.6;
-  margin-bottom:36px;
+  margin-bottom:18px;
   opacity:0;
   animation:fadeUp 0.8s 5.0s forwards;
 }
+.sim-reveal-sub strong{color:var(--cream);font-weight:500}
+.sim-reveal-cred{
+  font-size:13px;
+  color:var(--warm-grey);
+  line-height:1.6;
+  max-width:600px;
+  margin:0 auto 26px;
+  opacity:0;
+  animation:fadeUp 0.8s 5.15s forwards;
+}
+.sim-reveal-cred strong{color:var(--cream);font-weight:500}
 .sim-reveal-buttons{
   display:flex;
   gap:12px;
   justify-content:center;
   flex-wrap:wrap;
+  align-items:center;
   opacity:0;
   animation:fadeUp 0.8s 5.3s forwards;
 }
@@ -382,14 +440,10 @@ body{
   transition:all 0.3s;
 }
 .sim-reveal-cta:hover{background:var(--orange-light)}
-.sim-reveal-cta-glass{
-  background:transparent;
-  border:1px solid rgba(255,248,240,0.25);
-  color:var(--cream);
-}
-.sim-reveal-cta-glass:hover{
-  background:rgba(255,248,240,0.08);
-  border-color:rgba(255,248,240,0.4);
+.sim-reveal-offer{
+  font-size:13px;
+  color:var(--orange);
+  font-weight:500;
 }
 .sim-reveal-scroll{
   position:absolute;
@@ -411,6 +465,153 @@ body{
   width:1px;height:32px;
   background:linear-gradient(to bottom,var(--warm-grey),transparent);
   margin:8px auto 0;
+}
+
+/* ─── SITE HEADER / LOGO ─── */
+.site-header{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:22px 40px;
+  transition:background .3s, padding .3s, border-color .3s;
+  border-bottom:1px solid transparent;
+}
+.site-header.scrolled{
+  background:rgba(15,8,0,0.9);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  border-bottom-color:rgba(235,100,30,0.14);
+  padding:13px 40px;
+}
+.header-cta{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:10px 22px;background:var(--orange);color:var(--rich-black);
+  font-family:'Poppins',sans-serif;font-size:12.5px;font-weight:600;letter-spacing:.03em;
+  border-radius:7px;text-decoration:none;transition:background .3s;white-space:nowrap;
+}
+.header-cta:hover{background:var(--orange-light)}
+.site-logo{
+  font-family:'Angle','Cormorant Garamond',serif;
+  font-size:22px;font-weight:600;letter-spacing:0.02em;
+  text-decoration:none;display:inline-block;white-space:nowrap;
+  transition:opacity .2s;
+}
+.site-logo:hover{opacity:.85}
+.site-logo .the{color:var(--warm-grey);font-size:0.78em}
+.site-logo .core{color:var(--orange)}
+.site-logo .standard{color:var(--cream)}
+.site-logo .dot{color:var(--orange)}
+@media(max-width:600px){
+  .site-header{padding:16px 18px}
+  .site-header.scrolled{padding:11px 18px}
+  .site-logo{font-size:18px}
+  .header-cta{padding:9px 15px;font-size:11.5px}
+}
+
+/* ─── FILM HERO (featured video) ─── */
+.hero-film{
+  position:relative;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:104px 40px 84px;
+  text-align:center;
+  background:radial-gradient(ellipse at 50% -10%, rgba(235,100,30,0.12), transparent 55%), var(--rich-black);
+  overflow:hidden;
+}
+.hero-film-inner{max-width:920px;width:100%;margin:0 auto}
+.hf-eyebrow{
+  font-size:13px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--orange);margin-bottom:22px;opacity:0;animation:fadeUp .8s .15s forwards;
+}
+.hf-title{
+  font-family:'Angle','Cormorant Garamond',serif;
+  font-size:clamp(34px,5vw,60px);font-weight:400;line-height:1.14;color:var(--cream);
+  margin-bottom:22px;opacity:0;animation:fadeUp .8s .3s forwards;
+}
+.hf-title em{font-style:italic;color:var(--orange)}
+.hf-sub{
+  font-size:16px;font-weight:300;line-height:1.6;color:rgba(255,248,240,0.8);
+  max-width:660px;margin:0 auto 40px;opacity:0;animation:fadeUp .8s .45s forwards;
+}
+.hf-sub strong{color:var(--cream);font-weight:500}
+.hf-paths-lead{
+  font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--warm-grey);
+  margin:0 0 12px;opacity:0;animation:fadeUp .8s .5s forwards;
+}
+.hf-paths{
+  display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:0 auto 42px;
+  opacity:0;animation:fadeUp .8s .56s forwards;
+}
+.hf-path{
+  display:inline-flex;align-items:center;gap:8px;padding:12px 22px;
+  border:1px solid rgba(235,100,30,0.3);border-radius:9px;background:rgba(235,100,30,0.05);
+  color:var(--cream);font-size:14px;font-weight:500;text-decoration:none;transition:all .25s;
+}
+.hf-path:hover{border-color:var(--orange);background:rgba(235,100,30,0.12)}
+.hf-path span{color:var(--orange)}
+.hf-video{
+  position:relative;width:100%;max-width:860px;margin:0 auto 36px;
+  aspect-ratio:16/9;border-radius:14px;overflow:hidden;
+  border:1px solid rgba(235,100,30,0.22);
+  box-shadow:0 40px 90px rgba(0,0,0,0.55);
+  background:radial-gradient(ellipse at 50% 40%, rgba(235,100,30,0.10), transparent 60%), var(--surface);
+  opacity:0;animation:fadeUp .8s .58s forwards;
+}
+.hf-video-el{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;background:#000}
+.hf-play{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:14px;
+  background:linear-gradient(rgba(15,8,0,0.30),rgba(15,8,0,0.50));
+  border:none;cursor:pointer;color:var(--cream);transition:background .3s;
+}
+.hf-play:hover{background:linear-gradient(rgba(15,8,0,0.20),rgba(15,8,0,0.40))}
+.hf-play.hidden{display:none}
+.hf-play-icon{
+  width:78px;height:78px;border-radius:50%;
+  background:var(--orange);display:flex;align-items:center;justify-content:center;
+  box-shadow:0 10px 30px rgba(235,100,30,0.45);transition:transform .3s,background .3s;
+}
+.hf-play:hover .hf-play-icon{transform:scale(1.06);background:var(--orange-light)}
+.hf-play-icon::after{
+  content:'';display:block;
+  border-style:solid;border-width:11px 0 11px 19px;
+  border-color:transparent transparent transparent var(--rich-black);
+  margin-left:5px;
+}
+.hf-play-label{
+  font-size:13px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;
+  color:var(--cream);text-shadow:0 1px 8px rgba(0,0,0,0.5);
+}
+.hf-play-note{
+  font-size:11px;font-weight:400;letter-spacing:0.04em;color:var(--warm-grey);
+  text-transform:none;
+}
+.hf-cta-row{
+  display:flex;gap:14px;align-items:center;justify-content:center;flex-wrap:wrap;
+  margin-bottom:22px;opacity:0;animation:fadeUp .8s .72s forwards;
+}
+.hf-cta{
+  display:inline-flex;align-items:center;gap:8px;padding:15px 38px;background:var(--orange);
+  color:var(--rich-black);font-size:14px;font-weight:600;letter-spacing:0.04em;
+  border-radius:8px;text-decoration:none;transition:background .3s;
+}
+.hf-cta:hover{background:var(--orange-light)}
+.hf-offer{
+  display:block;font-size:13px;color:var(--warm-grey);font-weight:400;line-height:1.55;
+  max-width:540px;margin:14px auto 0;opacity:0;animation:fadeUp .8s .8s forwards;
+}
+.hf-offer strong{color:var(--orange);font-weight:600}
+.hf-cred{
+  font-size:13px;color:var(--warm-grey);line-height:1.6;max-width:600px;margin:0 auto;
+  opacity:0;animation:fadeUp .8s .84s forwards;
+}
+.hf-cred strong{color:var(--cream);font-weight:500}
+.hf-cred a{color:var(--cream);text-decoration:none;border-bottom:1px solid rgba(235,100,30,0.45);transition:border-color .2s}
+.hf-cred a:hover{border-color:var(--orange)}
+@media(max-width:600px){
+  .hero-film{padding:92px 20px 60px}
+  .hf-title{font-size:30px}
+  .hf-play-icon{width:64px;height:64px}
 }
 
 /* ─── SECTION: THE GAP ─── */
@@ -665,7 +866,7 @@ body{
   font-size:15px;
   font-weight:300;
   color:rgba(255,248,240,0.8);
-  max-width:500px;
+  max-width:520px;
   margin:0 auto 40px;
   line-height:1.6;
 }
@@ -718,6 +919,8 @@ body{
   display:flex;
   justify-content:space-between;
   align-items:center;
+  gap:16px;
+  flex-wrap:wrap;
   max-width:1200px;
   margin:0 auto;
 }
@@ -737,6 +940,8 @@ body{
   font-size:11px;
   color:var(--warm-grey);
 }
+.s-footer-creators a{color:var(--orange);text-decoration:none}
+.s-footer-creators a:hover{text-decoration:underline}
 
 /* ─── ANIMATIONS ─── */
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
@@ -833,6 +1038,12 @@ body{
   font-weight:300;
   color:rgba(255,248,240,0.75);
   line-height:1.5;
+}
+.s-how-foot{
+  font-size:13px;
+  color:var(--warm-grey);
+  margin-top:36px;
+  line-height:1.6;
 }
 
 /* ─── SECTION: FOR CANDIDATES ─── */
@@ -972,7 +1183,7 @@ body{
 }
 .rs-score-row{
   display:grid;
-  grid-template-columns:100px 1fr 36px;
+  grid-template-columns:104px 1fr 78px;
   align-items:center;
   gap:12px;
 }
@@ -1033,15 +1244,6 @@ body{
   color:var(--orange);
   margin-bottom:24px;
 }
-.s-credentials-headline{
-  font-family:'Angle','Cormorant Garamond',serif;
-  font-size:clamp(22px,3vw,32px);
-  font-weight:400;
-  font-style:italic;
-  line-height:1.4;
-  color:var(--cream);
-  margin-bottom:20px;
-}
 .s-credentials-text{
   font-size:15px;
   font-weight:300;
@@ -1091,6 +1293,7 @@ body{
 }
 @media(max-width:600px){
   .sim-topbar{padding:12px 16px}
+  .sim-topbar-meta{gap:12px}
   .sim-centre{padding:16px}
   .s-gap,.s-cta{padding:80px 24px}
   .s-how,.s-what,.s-candidates{padding:60px 24px}
@@ -1103,124 +1306,41 @@ body{
 <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
      HERO: Full-screen simulation — you've sat down at the desk
      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-<section class="sim-hero">
+<section class="hero-film">
+  <header class="site-header" id="siteHeader">
+    <a href="/" class="site-logo" aria-label="The Core Standard home">
+      <span class="the">The</span> <span class="core">Core</span> <span class="standard">Standard</span><span class="dot">.</span>
+    </a>
+    <a href="#waitlist" class="header-cta">Join the waitlist</a>
+  </header>
+  <div class="hero-film-inner">
+    <p class="hf-eyebrow">This is not an interview</p>
+    <h1 class="hf-title">Interviews show you who <em>presents</em> well.<br>This shows you who <em>performs.</em></h1>
+    <p class="hf-sub">The Core Standard is a realistic, scored assessment that puts an assistant through a real working day. <strong>Employers</strong> use it to see how a candidate performs before they hire. <strong>EAs and Private PAs</strong> use it to prove how good they are and stand out in recruitment processes &mdash; giving employers and recruiters real evidence of how they perform, not just how they interview.</p>
 
-  <!-- Simulation top bar -->
-  <div class="sim-topbar">
-    <div class="sim-topbar-brand">
-      <span class="the">The </span><span class="core">Core</span> <span class="standard">Standard</span><span class="dot">.</span>
+    <p class="hf-paths-lead">Which one are you?</p>
+    <div class="hf-paths">
+      <a href="#for-employers" class="hf-path">I&rsquo;m hiring an EA or PA <span>&rarr;</span></a>
+      <a href="#for-eas" class="hf-path">I&rsquo;m an EA or PA <span>&rarr;</span></a>
     </div>
-    <div class="sim-topbar-meta">
-      <span>Level 2 · Director EA</span>
-      <div class="sim-topbar-status">Simulation Active</div>
-      <span class="sim-timer-display" id="heroTimer">47:12</span>
+
+    <div class="hf-video" id="hfVideo">
+      <video class="hf-video-el" id="overviewVideo" playsinline preload="metadata">
+        <source src="hero-overview.mp4" type="video/mp4">
+      </video>
+      <button class="hf-play" id="hfPlay" type="button" aria-label="Play the overview film">
+        <span class="hf-play-icon"></span>
+        <span class="hf-play-label">The 90-second overview</span>
+        <span class="hf-play-note">Coming soon</span>
+      </button>
     </div>
+
+    <div class="hf-cta-row">
+      <a href="#waitlist" class="hf-cta">Join the Waitlist</a>
+    </div>
+    <p class="hf-offer">Launching autumn 2026. Founding-group members get early access, <strong>20% off</strong>, and a hand in shaping the product.</p>
+    <p class="hf-cred">Built by two specialists: the founder of <a href="https://www.lilyshippen.co.uk" target="_blank" rel="noopener"><strong>Lily Shippen</strong></a>, one of the UK&rsquo;s leading specialist EA recruitment agencies, and award-winning C-suite EA, <strong>Emily Partridge</strong>.</p>
   </div>
-
-  <!-- Three-panel workspace -->
-  <div class="sim-workspace">
-
-    <!-- Left: Module navigation -->
-    <div class="sim-sidebar">
-      <div class="sim-sidebar-label">Modules</div>
-      <div class="sim-module-item completed">
-        <div class="sim-module-num">&#10003;</div>
-        <span>Scenario Brief</span>
-      </div>
-      <div class="sim-module-item active">
-        <div class="sim-module-num">2</div>
-        <span>Inbox Triage</span>
-      </div>
-      <div class="sim-module-item">
-        <div class="sim-module-num">3</div>
-        <span>Priority Ranking</span>
-      </div>
-      <div class="sim-module-item">
-        <div class="sim-module-num">4</div>
-        <span>Stakeholder Dilemma</span>
-      </div>
-      <div class="sim-module-item">
-        <div class="sim-module-num">5</div>
-        <span>Written Response</span>
-      </div>
-      <div class="sim-module-item">
-        <div class="sim-module-num">6</div>
-        <span>Mindset &amp; Instinct</span>
-      </div>
-    </div>
-
-    <!-- Centre: Inbox -->
-    <div class="sim-centre">
-      <div class="sim-centre-label">Inbox · 5 new messages</div>
-      <div class="sim-email-list">
-        <div class="sim-email-row highlighted">
-          <div class="sim-email-sender">Claire Hadley, CFO <span class="sim-email-tag tag-urgent">Urgent</span></div>
-          <div class="sim-email-subject">Q2 budget sign-off: board pack prints at 4pm today</div>
-          <div class="sim-email-time">9:02 AM</div>
-        </div>
-        <div class="sim-email-row">
-          <div class="sim-email-sender">Rachel Trent, EA to CEO</div>
-          <div class="sim-email-subject">Heads up: James may call about Friday, don't commit to anything yet</div>
-          <div class="sim-email-time">9:14 AM</div>
-        </div>
-        <div class="sim-email-row">
-          <div class="sim-email-sender">David Keane, Senior Surveyor</div>
-          <div class="sim-email-subject">Quick one: can you move my 2pm to Thursday?</div>
-          <div class="sim-email-time">9:21 AM</div>
-        </div>
-        <div class="sim-email-row">
-          <div class="sim-email-sender">Sophie Hartwell, Managing Partner <span class="sim-email-tag tag-flag">Principal</span></div>
-          <div class="sim-email-subject">I've changed my mind on the venue. Call me when you're free.</div>
-          <div class="sim-email-time">9:33 AM</div>
-        </div>
-        <div class="sim-email-row">
-          <div class="sim-email-sender">IT Service Desk</div>
-          <div class="sim-email-subject">Laptop migration scheduled for 2:00 PM. Please save all open work</div>
-          <div class="sim-email-time">9:40 AM</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Right: Context panel -->
-    <div class="sim-context">
-      <div class="sim-context-label">Scenario Brief</div>
-      <div class="sim-brief-card">
-        <div class="sim-brief-title">The Hartwell Group</div>
-        <div class="sim-brief-text">You are EA to Sophie Hartwell, Managing Partner. She is in back-to-back client meetings until 3pm. You are her filter, her memory, and her judgment when she's unavailable.</div>
-      </div>
-      <div class="sim-brief-detail">
-        <span class="sim-brief-detail-label">Your principal</span>
-        <span class="sim-brief-detail-value">Sophie Hartwell</span>
-      </div>
-      <div class="sim-brief-detail">
-        <span class="sim-brief-detail-label">Availability</span>
-        <span class="sim-brief-detail-value">Unavailable until 3pm</span>
-      </div>
-      <div class="sim-brief-detail">
-        <span class="sim-brief-detail-label">Today's priority</span>
-        <span class="sim-brief-detail-value">Q2 board pack</span>
-      </div>
-      <div class="sim-brief-detail">
-        <span class="sim-brief-detail-label">Time remaining</span>
-        <span class="sim-brief-detail-value" style="color:var(--orange)">47:12</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- THE REVEAL — fades in over the simulation -->
-  <div class="sim-reveal">
-    <div class="sim-reveal-content">
-      <div class="sim-reveal-hook">This is not an interview</div>
-      <h1 class="sim-reveal-headline">Interviews show you who <em>presents</em> well.<br>This shows you who <em>performs.</em></h1>
-      <p class="sim-reveal-sub">The Core Standard is an online simulation of a realistic EA working day. Employers use it to see how candidates actually think before hiring. EAs use it to prove what interviews never capture.</p>
-      <p class="sim-reveal-early" style="font-size:13px;color:var(--orange);font-weight:500;margin-bottom:28px;opacity:0;animation:fadeUp 0.8s 5.1s forwards;">Join the waitlist for 20% off at launch + help shape the product.</p>
-      <div class="sim-reveal-buttons">
-        <a href="#waitlist" class="sim-reveal-cta">Join the Waitlist</a>
-      </div>
-    </div>
-    <div class="sim-reveal-scroll">Scroll</div>
-  </div>
-
 </section>
 
 <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1234,16 +1354,16 @@ body{
     <!-- Interviews column -->
     <div class="gap-col">
       <div class="gap-item gap-interview">
-        <div class="gap-item-label">What interviews test</div>
-        <div class="gap-item-text">Confidence. Presentation. Rehearsed answers to predictable questions.</div>
+        <div class="gap-item-label">What an interview shows</div>
+        <div class="gap-item-text">How well someone interviews: polished, confident answers to the questions they knew were coming.</div>
       </div>
       <div class="gap-item gap-interview">
-        <div class="gap-item-label">What CVs show</div>
-        <div class="gap-item-text">Where someone has been. Titles they've held. Nothing about how they actually operated.</div>
+        <div class="gap-item-label">What a CV shows</div>
+        <div class="gap-item-text">Where they've worked and the titles they've held — nothing about how they actually performed in the job.</div>
       </div>
       <div class="gap-item gap-interview">
         <div class="gap-item-label">What you're left with</div>
-        <div class="gap-item-text">A gut feeling. Three months to find out if it was right.</div>
+        <div class="gap-item-text">A gut feeling — and months on the job to find out whether it was right.</div>
       </div>
     </div>
 
@@ -1255,16 +1375,16 @@ body{
     <!-- Simulation column -->
     <div class="gap-col">
       <div class="gap-item gap-sim">
-        <div class="gap-item-label">What the simulation captures</div>
-        <div class="gap-item-text">Priority logic. Discretion under pressure. The instinct to protect your principal's time without being told to.</div>
+        <div class="gap-item-label">What the assessment shows</div>
+        <div class="gap-item-text">How they actually work when it's real: what they choose to do first when five things land at once, and the thinking behind each call.</div>
       </div>
       <div class="gap-item gap-sim">
         <div class="gap-item-label">What you actually see</div>
-        <div class="gap-item-text">How they triage when everything is urgent. Whether they escalate or absorb. How they write when it matters.</div>
+        <div class="gap-item-text">How they cope when everything's urgent, whether they escalate or quietly absorb it, and how they write when it counts.</div>
       </div>
       <div class="gap-item gap-sim">
         <div class="gap-item-label">What you walk away with</div>
-        <div class="gap-item-text">A detailed competency report. Scored. Benchmarked. Before you've spent a single hour interviewing.</div>
+        <div class="gap-item-text">A clear, scored report on how they prioritise, spot what matters, communicate and follow through — reviewed by a specialist, before you've spent an hour interviewing.</div>
       </div>
     </div>
   </div>
@@ -1276,45 +1396,67 @@ body{
 <section class="s-how">
   <div class="s-how-inner">
     <div class="s-how-label">How It Works</div>
-    <h2 class="s-how-headline">An online simulation of a <em>realistic</em> EA working day.</h2>
-    <p class="s-how-sub">A candidate receives a scenario brief: a company, a principal, a day that's already in motion. Emails land. Priorities collide. Stakeholders need answers. The clock is ticking. There are no "right" answers. We capture approach, judgment, composure, and communication.</p>
+    <h2 class="s-how-headline">A realistic working day, in <em>eight scenario modules.</em></h2>
+    <p class="s-how-sub">The person taking it, your candidate, or you assessing yourself, is dropped into a realistic working day: the same calibrated scenario for every candidate at that level. Real decisions, no multiple choice. Every answer is written in their own words. It shows how someone actually thinks, not what they rehearsed for an interview.</p>
     <div class="s-how-steps">
       <div class="s-how-step">
         <div class="s-how-step-num">1</div>
         <div class="s-how-step-content">
           <div class="s-how-step-title">Inbox Triage</div>
-          <div class="s-how-step-text">Conflicting emails arrive. What's truly urgent vs what just feels urgent?</div>
+          <div class="s-how-step-text">A full inbox arrives at once. What to action now, what to hold, what to ignore, and why.</div>
         </div>
       </div>
       <div class="s-how-step">
         <div class="s-how-step-num">2</div>
         <div class="s-how-step-content">
-          <div class="s-how-step-title">Priority Ranking</div>
-          <div class="s-how-step-text">Competing demands. Rank them. Then explain the logic.</div>
+          <div class="s-how-step-title">Simultaneous Demands</div>
+          <div class="s-how-step-text">Several requests land in the same moment. What to handle, delegate, or hold, under real time pressure.</div>
         </div>
       </div>
       <div class="s-how-step">
         <div class="s-how-step-num">3</div>
         <div class="s-how-step-content">
-          <div class="s-how-step-title">Stakeholder Dilemma</div>
-          <div class="s-how-step-text">Your principal's instruction conflicts with an opportunity. Choose. Justify.</div>
+          <div class="s-how-step-title">Access &amp; Discretion</div>
+          <div class="s-how-step-text">A senior figure pushes for the principal's time and private number. Guard access and privacy without cooling the relationship.</div>
         </div>
       </div>
       <div class="s-how-step">
         <div class="s-how-step-num">4</div>
         <div class="s-how-step-content">
-          <div class="s-how-step-title">Written Communication</div>
-          <div class="s-how-step-text">Draft a response under pressure. Tone matters. Clarity matters more.</div>
+          <div class="s-how-step-title">Rebuilding the Day</div>
+          <div class="s-how-step-text">The afternoon has to be rebuilt around a fixed personal deadline. Sequence what matters, protect what cannot move.</div>
         </div>
       </div>
       <div class="s-how-step">
         <div class="s-how-step-num">5</div>
         <div class="s-how-step-content">
-          <div class="s-how-step-title">Mindset &amp; Instinct</div>
-          <div class="s-how-step-text">How do they think about the role? What drives their decisions?</div>
+          <div class="s-how-step-title">Representing the Principal</div>
+          <div class="s-how-step-text">Speak for the principal to a frustrated, important client, in their voice and under pressure.</div>
+        </div>
+      </div>
+      <div class="s-how-step">
+        <div class="s-how-step-num">6</div>
+        <div class="s-how-step-content">
+          <div class="s-how-step-title">A Sensitive Situation</div>
+          <div class="s-how-step-text">A journalist makes contact holding something that is not yet public. Read the risk, and control it.</div>
+        </div>
+      </div>
+      <div class="s-how-step">
+        <div class="s-how-step-num">7</div>
+        <div class="s-how-step-content">
+          <div class="s-how-step-title">Judgement with AI</div>
+          <div class="s-how-step-text">Use AI on sensitive, board-level work at speed, without creating a data or a trust problem.</div>
+        </div>
+      </div>
+      <div class="s-how-step">
+        <div class="s-how-step-num">8</div>
+        <div class="s-how-step-content">
+          <div class="s-how-step-title">Reading the Numbers</div>
+          <div class="s-how-step-text">Turn noisy data into a clear, board-ready read that leads with what needs deciding first.</div>
         </div>
       </div>
     </div>
+    <p class="s-how-foot">Every response is scored on the five pillars: <strong style="color:var(--cream);font-weight:500">acuity, partnership, communication, prioritisation and execution</strong>, then reviewed and signed off by a specialist before it reaches anyone.</p>
   </div>
 </section>
 
@@ -1325,21 +1467,21 @@ body{
   <div class="s-what-inner">
     <div class="s-what-text">
       <div class="s-what-label">For Employers</div>
-      <h2 class="s-what-title">Send a link. Get a <em>competency report.</em></h2>
-      <p class="s-what-desc">You send a candidate the simulation link. They complete it online. You receive a detailed report, scored across priority logic, discretion, ownership, and composure, before you've spent a single hour interviewing.</p>
-      <p class="s-what-desc">No more relying on gut feeling. No more polished interviewers who fall apart in week one. You see how they actually think.</p>
+      <h2 class="s-what-title">Send a link. Get a <em>scored report</em> in 48 hours.</h2>
+      <p class="s-what-desc">You pick the level and send your candidate a private, single-use link. They sit a realistic working day online. You receive a detailed report, scored across acuity, partnership, communication, prioritisation and execution, with a clear hire recommendation, before you've spent an hour interviewing.</p>
+      <p class="s-what-desc">No more relying on gut feeling. No more polished interviewers who fall apart in week one. You see how they actually think, at the level you're hiring for.</p>
       <div class="s-what-facts">
         <div class="s-what-fact">
-          <div class="s-what-fact-num">6</div>
-          <div class="s-what-fact-text">Modules per simulation, from inbox triage to stakeholder dilemmas</div>
+          <div class="s-what-fact-num">8</div>
+          <div class="s-what-fact-text">Scenario modules per assessment, from inbox triage to a live press dilemma</div>
         </div>
         <div class="s-what-fact">
-          <div class="s-what-fact-num">4</div>
-          <div class="s-what-fact-text">Competencies scored: priority logic, discretion, ownership, composure</div>
+          <div class="s-what-fact-num">5</div>
+          <div class="s-what-fact-text">Pillars scored: acuity, partnership, communication, prioritisation, execution</div>
         </div>
         <div class="s-what-fact">
-          <div class="s-what-fact-num">30</div>
-          <div class="s-what-fact-text">Years of EA placement experience behind every scenario</div>
+          <div class="s-what-fact-num">48h</div>
+          <div class="s-what-fact-text">Turnaround, every report expert-reviewed and signed off</div>
         </div>
       </div>
     </div>
@@ -1348,7 +1490,7 @@ body{
     <div class="s-what-visual">
       <div class="sim-mini">
         <div class="sim-mini-bar">
-          <span>Module 4 · Stakeholder Dilemma</span>
+          <span>Module 2 · Simultaneous Demands</span>
           <span class="sim-mini-timer">31:44</span>
         </div>
         <div class="sim-mini-body">
@@ -1376,27 +1518,27 @@ body{
 </section>
 
 <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-     FOR EAs: Self-assessment
+     FOR EAs & PAs: Self-assessment (TCS Certified)
      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
 <section class="s-candidates" id="for-eas">
   <div class="s-candidates-inner">
     <div class="s-candidates-text">
-      <div class="s-candidates-label">For EAs</div>
+      <div class="s-candidates-label">For EAs &amp; Private PAs</div>
       <h2 class="s-candidates-title">Prove it before the <em>interview.</em></h2>
-      <p class="s-candidates-desc">You don't need an employer to send you this. Take the simulation yourself, receive a full competency report, and get a recruiter summary. A one-page credential you can attach to applications or share with any recruiter or hiring manager.</p>
+      <p class="s-candidates-desc">You don't need an employer to send you this. Take the same assessment employers use, on your own, and get <strong style="color:var(--cream);font-weight:500">TCS Certified</strong>: a full report on how you did, a one-page summary for recruiters, a digital badge, and a certificate. One sitting, graded against every level, your result is the level you demonstrated.</p>
       <p class="s-candidates-desc">Every CV says "proactive, discreet, detail-oriented." This is the proof.</p>
       <div class="s-candidates-steps">
         <div class="s-candidates-step">
           <div class="s-candidates-step-num">1</div>
-          <div class="s-candidates-step-text"><strong>Take the simulation</strong> online, in your own time</div>
+          <div class="s-candidates-step-text"><strong>Take the assessment</strong> online, in your own time</div>
         </div>
         <div class="s-candidates-step">
           <div class="s-candidates-step-num">2</div>
-          <div class="s-candidates-step-text"><strong>Get your report</strong> scored across priority logic, discretion, ownership, and composure</div>
+          <div class="s-candidates-step-text"><strong>Get your report</strong> scored across acuity, partnership, communication, prioritisation and execution</div>
         </div>
         <div class="s-candidates-step">
           <div class="s-candidates-step-num">3</div>
-          <div class="s-candidates-step-text"><strong>Share your recruiter summary</strong> attach it to direct applications or send it to any recruiter alongside your CV</div>
+          <div class="s-candidates-step-text"><strong>Share your summary, badge &amp; certificate</strong> with any recruiter or hiring manager, alongside your CV</div>
         </div>
       </div>
     </div>
@@ -1408,32 +1550,37 @@ body{
         </div>
         <div class="rs-candidate">
           <div class="rs-name">Alexandra Chen</div>
-          <div class="rs-meta">TCS Certified · Level 2 (Director EA)</div>
+          <div class="rs-meta">TCS Certified · Graded assessment</div>
         </div>
         <div class="rs-rating">
-          <div class="rs-rating-label">Overall Rating</div>
-          <div class="rs-rating-badge">Strong Core Fit</div>
+          <div class="rs-rating-label">Result — the level demonstrated</div>
+          <div class="rs-rating-badge">Trusted Partner</div>
         </div>
         <div class="rs-scores">
           <div class="rs-score-row">
-            <span class="rs-score-label">Priority Logic</span>
-            <div class="rs-score-bar"><div class="rs-score-fill" style="width:88%"></div></div>
-            <span class="rs-score-val">8.8</span>
+            <span class="rs-score-label">Acuity</span>
+            <div class="rs-score-bar"><div class="rs-score-fill" style="width:84%"></div></div>
+            <span class="rs-score-val" style="font-size:11px;letter-spacing:.02em">Exceptional</span>
           </div>
           <div class="rs-score-row">
-            <span class="rs-score-label">Discretion</span>
-            <div class="rs-score-bar"><div class="rs-score-fill" style="width:82%"></div></div>
-            <span class="rs-score-val">8.2</span>
+            <span class="rs-score-label">Partnership</span>
+            <div class="rs-score-bar"><div class="rs-score-fill" style="width:68%"></div></div>
+            <span class="rs-score-val" style="font-size:11px;letter-spacing:.02em">Strong</span>
           </div>
           <div class="rs-score-row">
-            <span class="rs-score-label">Ownership</span>
-            <div class="rs-score-bar"><div class="rs-score-fill" style="width:91%"></div></div>
-            <span class="rs-score-val">9.1</span>
+            <span class="rs-score-label">Communication</span>
+            <div class="rs-score-bar"><div class="rs-score-fill" style="width:84%"></div></div>
+            <span class="rs-score-val" style="font-size:11px;letter-spacing:.02em">Exceptional</span>
           </div>
           <div class="rs-score-row">
-            <span class="rs-score-label">Composure</span>
-            <div class="rs-score-bar"><div class="rs-score-fill" style="width:85%"></div></div>
-            <span class="rs-score-val">8.5</span>
+            <span class="rs-score-label">Prioritisation</span>
+            <div class="rs-score-bar"><div class="rs-score-fill" style="width:68%"></div></div>
+            <span class="rs-score-val" style="font-size:11px;letter-spacing:.02em">Strong</span>
+          </div>
+          <div class="rs-score-row">
+            <span class="rs-score-label">Execution</span>
+            <div class="rs-score-bar"><div class="rs-score-fill" style="width:68%"></div></div>
+            <span class="rs-score-val" style="font-size:11px;letter-spacing:.02em">Strong</span>
           </div>
         </div>
         <div class="rs-footer">
@@ -1450,12 +1597,12 @@ body{
      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
 <section class="s-credentials">
   <div class="s-credentials-inner" style="text-align:left;max-width:760px;">
-    <div class="s-credentials-label">Built by experts</div>
+    <div class="s-credentials-label">Built by specialists</div>
     <p class="s-credentials-text">In 15 years of specialist EA recruitment, the question I was asked more than any other by clients was: "How do you test your candidates?" At Lily Shippen we heavily vet every candidate we place, but there was always a missing piece.</p>
-    <p class="s-credentials-text">Interviews test confidence and presentation. They don't reveal how someone triages a chaotic inbox at 8am, handles a last minute board paper, or navigates a sensitive situation with a difficult stakeholder.</p>
-    <p class="s-credentials-text">The Core Standard fills that gap. Every assessment is a simulation of a realistic working day, designed from real situations we've seen play out across hundreds of placements. It's built on what actually predicts success in the role, not what looks good across a desk.</p>
-    <p class="s-credentials-text"><a href="https://www.lilyshippen.co.uk" target="_blank" style="color:var(--orange);text-decoration:none;border-bottom:1px solid rgba(235,100,30,0.3);">Lily Shippen</a> recruits. <a href="https://www.eavolve.co.uk" target="_blank" style="color:var(--orange);text-decoration:none;border-bottom:1px solid rgba(235,100,30,0.3);">eavolve</a> develops. <a href="https://www.thecorestandard.co.uk" style="color:var(--orange);text-decoration:none;border-bottom:1px solid rgba(235,100,30,0.3);">The Core Standard</a> assesses. Together, an ecosystem that supports EAs and the businesses that rely on them, from hire, through development, to measurable performance.</p>
-    <p class="s-credentials-attribution">Lily Shippen &amp; Emily Partridge, Co-creators of The Core Standard</p>
+    <p class="s-credentials-text">Interviews test confidence and presentation. They don't reveal how someone triages a chaotic inbox at 8am, handles a last-minute board paper, or navigates a sensitive situation with a difficult stakeholder.</p>
+    <p class="s-credentials-text">The Core Standard fills that gap. Every assessment is a realistic working day, designed from real situations we've seen play out across hundreds of placements. It's built on what actually predicts success in the role, not what looks good across a desk.</p>
+    <p class="s-credentials-text"><a href="https://www.lilyshippen.co.uk" target="_blank" rel="noopener" style="color:var(--orange);text-decoration:none;border-bottom:1px solid rgba(235,100,30,0.3);">Lily Shippen</a> recruits. <a href="https://www.eavolve.co.uk" target="_blank" rel="noopener" style="color:var(--orange);text-decoration:none;border-bottom:1px solid rgba(235,100,30,0.3);">eavolve</a> develops. The Core Standard assesses. Together, an ecosystem that supports EAs and PAs and the businesses that rely on them, from hire, through development, to measurable performance.</p>
+    <p class="s-credentials-attribution">Lily Shippen &amp; Emily Partridge, Co-founders of The Core Standard</p>
   </div>
 </section>
 
@@ -1464,12 +1611,13 @@ body{
      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
 <section class="s-cta" id="waitlist">
   <h2 class="s-cta-headline">See what interviews <em>can't.</em></h2>
-  <p class="s-cta-sub">The Core Standard launches soon. Waitlist members get 20% off at launch and early input into how the product takes shape.</p>
+  <p class="s-cta-sub">The Core Standard opens to a founding group this autumn. Join the waitlist for early access, <strong style="color:var(--cream);font-weight:500">20% off at launch</strong>, and a hand in how the product takes shape.</p>
   <form class="waitlist-form" action="https://formspree.io/f/xlgaedwk" method="POST" id="waitlistForm">
     <input type="email" name="email" class="waitlist-input" placeholder="Your email address" required>
+    <input type="hidden" name="_subject" value="New Core Standard waitlist signup">
     <button type="submit" class="waitlist-btn">Join Waitlist</button>
   </form>
-  <div id="waitlistSuccess" style="display:none;padding:16px;color:var(--orange);font-weight:500;font-size:15px;">You're on the list.</div>
+  <div id="waitlistSuccess" style="display:none;padding:16px;color:var(--orange);font-weight:500;font-size:15px;">You're on the list. We'll be in touch as launch gets close.</div>
   <p class="s-cta-note">No spam. Just early access, your discount, and launch updates.</p>
 </section>
 
@@ -1480,21 +1628,36 @@ body{
   <div class="s-footer-brand">
     <span class="the">The </span><span class="core">Core</span> Standard<span class="dot">.</span>
   </div>
-  <div class="s-footer-creators">Created by Lily Shippen & Emily Partridge</div>
-  <div class="s-footer-text">&copy; 2026 The Core Standard. All rights reserved.</div>
+  <div class="s-footer-creators">Created by Lily Shippen &amp; Emily Partridge &middot; <a href="https://www.linkedin.com/company/the-core-standard/" target="_blank" rel="noopener">LinkedIn</a></div>
+  <div class="s-footer-text">&copy; 2026 The Core Standard &middot; eavolve Ltd. All rights reserved.</div>
 </footer>
 
-<!-- ━━━ Timer countdown ━━━ -->
+<!-- ━━━ Featured overview video + waitlist ━━━ -->
 <script>
+// Sticky header background on scroll
 (function(){
-  let seconds = 47*60+12;
-  const timer = document.getElementById('heroTimer');
-  setInterval(()=>{
-    if(seconds>0) seconds--;
-    const m = Math.floor(seconds/60);
-    const s = seconds%60;
-    timer.textContent = m+':'+(s<10?'0':'')+s;
-  },1000);
+  var h = document.getElementById('siteHeader');
+  if(!h) return;
+  var onScroll = function(){ h.classList.toggle('scrolled', window.scrollY > 24); };
+  onScroll();
+  window.addEventListener('scroll', onScroll, {passive:true});
+})();
+
+(function(){
+  var v = document.getElementById('overviewVideo');
+  var btn = document.getElementById('hfPlay');
+  if(!v || !btn) return;
+  btn.addEventListener('click', function(){
+    var pr = v.play();
+    if(pr && pr.then){
+      pr.then(function(){ btn.classList.add('hidden'); v.setAttribute('controls',''); })
+        .catch(function(){ /* film not published yet: stay a teaser, no empty player */ });
+    }
+  });
+  v.addEventListener('ended', function(){
+    btn.classList.remove('hidden');
+    v.removeAttribute('controls');
+  });
 })();
 
 // Waitlist form submission
@@ -1507,7 +1670,12 @@ document.getElementById('waitlistForm').addEventListener('submit', function(e){
       if(r.ok){
         form.style.display='none';
         document.getElementById('waitlistSuccess').style.display='block';
+      } else {
+        window.location.href = 'mailto:hello@thecorestandard.co.uk?subject=Join%20the%20waitlist';
       }
+    })
+    .catch(function(){
+      window.location.href = 'mailto:hello@thecorestandard.co.uk?subject=Join%20the%20waitlist';
     });
 });
 </script>
