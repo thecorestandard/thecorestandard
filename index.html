@@ -1325,13 +1325,13 @@ body{
     </div>
 
     <div class="hf-video" id="hfVideo">
-      <video class="hf-video-el" id="overviewVideo" playsinline preload="metadata">
+      <video class="hf-video-el" id="overviewVideo" playsinline preload="metadata" poster="hero-poster.jpg">
         <source src="hero-overview.mp4" type="video/mp4">
       </video>
       <button class="hf-play" id="hfPlay" type="button" aria-label="Play the overview film">
         <span class="hf-play-icon"></span>
         <span class="hf-play-label">The 90-second overview</span>
-        <span class="hf-play-note">Coming soon</span>
+        <span class="hf-play-note">Watch &middot; 90 seconds</span>
       </button>
     </div>
 
@@ -1609,18 +1609,36 @@ body{
 </section>
 
 <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     BENCHMARK
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section class="s-gap" id="benchmark">
+  <div class="s-gap-label">The missing benchmark</div>
+  <h2 class="s-gap-headline">There has never been a way to <em>prove</em> how good you are.</h2>
+  <p style="font-size:16px;line-height:1.75;color:rgba(255,248,240,0.8);max-width:680px;margin:0 auto 20px;font-weight:300;">Every other profession has a benchmark. Lawyers qualify, accountants sit their exams, salespeople have their numbers. Executive Assistants and Private PAs have had nothing: no independent, objective way to show the level they actually work at.</p>
+  <p style="font-size:16px;line-height:1.75;color:rgba(255,248,240,0.8);max-width:680px;margin:0 auto;font-weight:300;">So when you go for an internal promotion, ask for the payrise you have earned, or move to a new role, you are left making your case on a CV and a good interview. Neither shows how you think when a day falls apart, how you protect a principal under pressure, or how you hold a room in writing. The Core Standard gives you that benchmark: an independent, scored measure of how you perform across a real working day, and something concrete to put in front of your manager or a new employer, evidence rather than opinion.</p>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
      WAITLIST CTA
      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
 <section class="s-cta" id="waitlist">
   <h2 class="s-cta-headline">See what interviews <em>can't.</em></h2>
-  <p class="s-cta-sub">The Core Standard opens to a founding group this autumn. Join the waitlist for early access, <strong style="color:var(--cream);font-weight:500">20% off at launch</strong>, and a hand in how the product takes shape.</p>
+  <p class="s-cta-sub">The Core Standard opens this autumn. Join the waitlist for launch news and updates, and be first to hear when the soft-launch price goes live.</p>
   <form class="waitlist-form" action="https://formspree.io/f/xlgaedwk" method="POST" id="waitlistForm">
     <input type="email" name="email" class="waitlist-input" placeholder="Your email address" required>
     <input type="hidden" name="_subject" value="New Core Standard waitlist signup">
-    <button type="submit" class="waitlist-btn">Join Waitlist</button>
+    <button type="submit" class="waitlist-btn">Join the waitlist</button>
   </form>
   <div id="waitlistSuccess" style="display:none;padding:16px;color:var(--orange);font-weight:500;font-size:15px;">You're on the list. We'll be in touch as launch gets close.</div>
-  <p class="s-cta-note">No spam. Just early access, your discount, and launch updates.</p>
+  <p class="s-cta-note">No spam. Just launch news, early access, and your discount.</p>
+
+  <!-- SOFT LAUNCH OFFER -->
+  <div style="max-width:560px;margin:48px auto 0;padding:30px 32px;border:1.5px solid var(--orange);border-radius:16px;background:rgba(235,100,30,0.06);text-align:center;">
+    <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--orange);margin-bottom:14px;">Soft launch &middot; first two weeks only</div>
+    <div style="font-family:'Angle','Cormorant Garamond',serif;font-size:44px;color:var(--cream);line-height:1;margin-bottom:10px;">&pound;100</div>
+    <p style="font-size:14px;line-height:1.65;color:rgba(255,248,240,0.78);max-width:420px;margin:0 auto 22px;font-weight:300;">For the first two weeks after launch, sit the full Core Standard Certified assessment at the soft-launch price of <strong style="color:var(--cream);font-weight:500">&pound;100</strong>, instead of the standard &pound;225. Limited to the launch window.</p>
+    <a href="mailto:hello@thecorestandard.co.uk?subject=Core%20Standard%20soft-launch%20place" class="waitlist-btn" style="display:inline-block;text-decoration:none;">Claim the &pound;100 soft-launch price</a>
+  </div>
 </section>
 
 <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
