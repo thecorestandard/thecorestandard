@@ -1645,7 +1645,7 @@ body{
   <div id="launch-offer" style="max-width:560px;margin:48px auto 0;padding:30px 32px;border:1.5px solid var(--orange);border-radius:16px;background:rgba(235,100,30,0.06);text-align:center;scroll-margin-top:90px;">
     <div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--orange);margin-bottom:14px;">Soft launch &middot; first two weeks only</div>
     <div style="font-family:'Angle','Cormorant Garamond',serif;font-size:44px;color:var(--cream);line-height:1;margin-bottom:10px;">&pound;100</div>
-    <p style="font-size:14px;line-height:1.65;color:rgba(255,248,240,0.78);max-width:420px;margin:0 auto 18px;font-weight:300;">For the first two weeks after launch, sit the full Core Standard Certified assessment at the soft-launch price of <strong style="color:var(--cream);font-weight:500">&pound;100</strong>, instead of the standard &pound;225. Limited to the launch window.</p>
+    <p style="font-size:14px;line-height:1.65;color:rgba(255,248,240,0.78);max-width:420px;margin:0 auto 18px;font-weight:300;">For the first two weeks after launch, sit the full Core Standard Certified assessment at the soft-launch price of <strong style="color:var(--cream);font-weight:500">&pound;100</strong> including VAT, instead of the standard &pound;225. Limited to the launch window.</p>
     <div style="display:inline-block;font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--orange);border:1px solid rgba(235,100,30,0.4);border-radius:100px;padding:6px 14px;margin-bottom:22px;">Available until 31 August</div>
     <div><button type="button" id="claimBtn" class="waitlist-btn" style="display:inline-block;text-decoration:none;">Claim the &pound;100 soft-launch price</button></div>
   </div>
@@ -1672,7 +1672,12 @@ body{
 .tcs-modal-list li b{color:#1A1008;font-weight:600;}
 .tcs-modal-secure{display:flex;align-items:center;gap:8px;font-size:12px;color:#6A5540;background:rgba(235,100,30,0.07);border-radius:10px;padding:11px 14px;margin-bottom:20px;}
 .tcs-modal-secure svg{flex-shrink:0;}
+.tcs-modal-agree{display:flex;align-items:flex-start;gap:10px;font-size:12.5px;line-height:1.5;color:#4A3826;margin-bottom:16px;cursor:pointer;}
+.tcs-modal-agree input{margin-top:2px;width:16px;height:16px;accent-color:var(--orange);flex-shrink:0;cursor:pointer;}
+.tcs-modal-agree a{color:var(--orange-dark);text-decoration:underline;}
+.tcs-modal-agree.nudge{color:var(--orange-dark);font-weight:600;}
 .tcs-modal-actions{display:flex;flex-direction:column;gap:10px;}
+.tcs-modal-go.disabled{opacity:0.45;cursor:not-allowed;}
 .tcs-modal-go{display:block;width:100%;padding:16px 24px;background:var(--orange);color:var(--rich-black);font-family:'Poppins',sans-serif;font-size:14px;font-weight:600;letter-spacing:0.03em;text-align:center;text-decoration:none;border:none;border-radius:8px;cursor:pointer;transition:background 0.25s;}
 .tcs-modal-go:hover{background:var(--orange-light);}
 .tcs-modal-cancel{display:block;width:100%;padding:12px;background:transparent;color:#7A6552;font-family:'Poppins',sans-serif;font-size:13px;font-weight:500;text-align:center;border:none;cursor:pointer;}
@@ -1685,12 +1690,12 @@ body{
     <button type="button" class="tcs-modal-close" id="claimModalClose" aria-label="Close">&times;</button>
     <div class="tcs-modal-eyebrow">Soft launch &middot; Certified EA Assessment</div>
     <h3 class="tcs-modal-title" id="claimModalTitle">Here is what you are buying</h3>
-    <div class="tcs-modal-price"><b>&pound;100</b><s>&pound;225</s><span>soft-launch price</span></div>
+    <div class="tcs-modal-price"><b>&pound;100</b><s>&pound;225</s><span>soft-launch price, incl. VAT</span></div>
     <p class="tcs-modal-intro">The full Core Standard Certified assessment, candidate version: a realistic, scored simulation of a genuine working day in an executive office. Not a quiz, and nothing you can revise for.</p>
     <ul class="tcs-modal-list">
       <li><b>Your place is confirmed on payment.</b> We email your unique access code within 24 hours.</li>
       <li><b>Two weeks to sit it.</b> From the day your code arrives, you have two weeks to take the assessment whenever suits you.</li>
-      <li><b>One sitting, nine modules.</b> Around 97 minutes, uninterrupted and online. You work through one realistic day, start to finish.</li>
+      <li><b>One sitting, nine modules.</b> You have up to 97 minutes, and many finish sooner. It runs uninterrupted and online: one realistic day, start to finish.</li>
       <li><b>Your result.</b> A graded feedback report and a verifiable certificate at the level you reach: Professional, Trusted Partner or Executive Partner.</li>
       <li><b>A soft-launch place.</b> The Core Standard is in its launch period, so your certificate is issued as provisional and your feedback helps shape the final standard.</li>
     </ul>
@@ -1698,8 +1703,12 @@ body{
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6A5540" stroke-width="2"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
       <span>Secure payment is handled by Stripe. We never see your card details.</span>
     </div>
+    <label class="tcs-modal-agree" id="claimAgreeLabel">
+      <input type="checkbox" id="claimAgree">
+      <span>I agree to the <a href="/terms" target="_blank" rel="noopener">Terms and Conditions</a> and <a href="/privacy" target="_blank" rel="noopener">Privacy Notice</a>. I ask for my access to begin within 24 hours and understand I lose my right to cancel once my code has been issued.</span>
+    </label>
     <div class="tcs-modal-actions">
-      <a href="#" class="tcs-modal-go" id="claimModalGo" rel="noopener">Continue to secure checkout &rarr;</a>
+      <a href="#" class="tcs-modal-go disabled" id="claimModalGo" aria-disabled="true" rel="noopener">Continue to secure checkout &rarr;</a>
       <button type="button" class="tcs-modal-cancel" id="claimModalCancel">Not just yet</button>
     </div>
   </div>
@@ -1727,8 +1736,30 @@ body{
     }
   }
 
+  // ─── Terms agreement gate: checkout stays disabled until the box is ticked ───
+  var agree = document.getElementById('claimAgree');
+  var agreeLabel = document.getElementById('claimAgreeLabel');
+  function syncGate(){
+    if(!goBtn) return;
+    var ok = agree && agree.checked;
+    goBtn.classList.toggle('disabled', !ok);
+    goBtn.setAttribute('aria-disabled', ok ? 'false' : 'true');
+    if(ok && agreeLabel) agreeLabel.classList.remove('nudge');
+  }
+  if(agree){ agree.addEventListener('change', syncGate); }
+  if(goBtn){
+    goBtn.addEventListener('click', function(e){
+      if(!agree || !agree.checked){
+        e.preventDefault();
+        if(agreeLabel) agreeLabel.classList.add('nudge');
+        if(agree) agree.focus();
+      }
+    });
+  }
+  syncGate();
+
   var lastFocus = null;
-  function openModal(){ lastFocus = document.activeElement; overlay.classList.add('open'); document.body.style.overflow='hidden'; if(goBtn) goBtn.focus(); }
+  function openModal(){ lastFocus = document.activeElement; overlay.classList.add('open'); document.body.style.overflow='hidden'; syncGate(); if(agree) agree.focus(); }
   function closeModal(){ overlay.classList.remove('open'); document.body.style.overflow=''; if(lastFocus) lastFocus.focus(); }
 
   openBtn.addEventListener('click', openModal);
@@ -1745,8 +1776,8 @@ body{
   <div class="s-footer-brand">
     <span class="the">The </span><span class="core">Core</span> Standard<span class="dot">.</span>
   </div>
-  <div class="s-footer-creators">Created by Lily Shippen &amp; Emily Partridge &middot; <a href="https://www.linkedin.com/company/the-core-standard/" target="_blank" rel="noopener">LinkedIn</a></div>
-  <div class="s-footer-text">&copy; 2026 The Core Standard &middot; eavolve Ltd. All rights reserved.</div>
+  <div class="s-footer-creators">Created by Lily Shippen &amp; Emily Partridge &middot; <a href="https://www.linkedin.com/company/the-core-standard/" target="_blank" rel="noopener">LinkedIn</a> &middot; <a href="/terms">Terms</a> &middot; <a href="/privacy">Privacy</a></div>
+  <div class="s-footer-text">&copy; 2026 The Core Standard &middot; eavolve Ltd (company no. 15678513), 62-66 Deansgate, Manchester, M3 2EN. All rights reserved.</div>
 </footer>
 
 <!-- ━━━ Featured overview video + waitlist ━━━ -->
