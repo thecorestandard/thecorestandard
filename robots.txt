@@ -1,2 +1,5 @@
+# The Core Standard
 User-agent: *
 Allow: /
+
+Sitemap: https://thecorestandard.co.uk/sitemap.xml
