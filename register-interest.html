@@ -98,17 +98,17 @@
  <span class="mega-title">Benchmark Your Team</span>
  <span class="mega-desc">Assess the EAs you already have. From &pound;225 +VAT per person.</span>
  </a>
-<a href="ea-manager.html">
+<a href="register-interest.html?product=ea-manager">
  <span class="dd-eyebrow">Multi-EA Teams</span>
  <span class="mega-title">EA Manager Edition</span>
  <span class="mega-desc">For anyone running multiple EAs. Coming soon.</span>
  </a>
- <a href="private-pa.html">
+ <a href="register-interest.html?product=private-pa">
  <span class="dd-eyebrow">Private Households</span>
  <span class="mega-title">Private PA</span>
  <span class="mega-desc">Discretion-led household support. Coming soon.</span>
  </a>
- <a href="chief-of-staff.html">
+ <a href="register-interest.html?product=chief-of-staff">
  <span class="dd-eyebrow">Leadership</span>
  <span class="mega-title">Chief of Staff</span>
  <span class="mega-desc">Proxy decision-making. Coming soon.</span>
@@ -122,7 +122,7 @@
  <span class="mega-desc">One assessment. &pound;175 inc. VAT.</span>
  </a>
  <div class="nav-mega-heading nav-mega-heading-second">Add-on</div>
- <a href="tcs-match.html">
+ <a href="register-interest.html?product=tcs-match">
  <span class="dd-eyebrow">Compatibility</span>
  <span class="mega-title">TCS Match</span>
  <span class="mega-desc">Personality &amp; working-style overlay. Coming soon.</span>
@@ -182,7 +182,7 @@
 </section>
 
 <script>
-(function(){try{var p=new URLSearchParams(location.search).get('product');if(!p)return;var sel=document.getElementById('ri-product');if(!sel)return;for(var i=0;i<sel.options.length;i++){if(sel.options[i].value.toLowerCase()===p.toLowerCase()){sel.selectedIndex=i;return;}}}catch(e){}})();
+(function(){try{var p=new URLSearchParams(location.search).get('product');if(!p)return;var sel=document.getElementById('ri-product');if(!sel)return;var norm=function(s){return String(s).toLowerCase().replace(/[^a-z0-9]/g,"");};var q=norm(p);if(!q)return;for(var i=0;i<sel.options.length;i++){var v=norm(sel.options[i].value);if(v===q||v.indexOf(q)===0){sel.selectedIndex=i;return;}}}catch(e){}})();
 </script>
 
 <footer class="site-footer">
