@@ -2,6 +2,11 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "trailingSlash": false,
   "cleanUrls": false,
+  "rewrites": [
+    { "source": "/", "has": [{ "type": "host", "value": "verify.thecorestandard.co.uk" }], "destination": "/verify/index.html" },
+    { "source": "/:id([A-Za-z0-9-]+)", "has": [{ "type": "host", "value": "verify.thecorestandard.co.uk" }], "destination": "/verify/index.html" },
+    { "source": "/verify/:id([A-Za-z0-9-]+)", "destination": "/verify/index.html" }
+  ],
   "headers": [
     {
       "source": "/(.*)",

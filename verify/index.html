@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M2RZGCY0Q2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-M2RZGCY0Q2');
+</script>
+
+<title>Verify a Certificate | The Core Standard</title>
+<meta name="description" content="Confirm a TCS Certified certificate issued by The Core Standard. Enter the certificate ID printed on the certificate or follow the verifier link on a digital badge.">
+<meta name="robots" content="noindex,follow">
+<link rel="canonical" href="https://verify.thecorestandard.co.uk/">
+<link rel="icon" type="image/png" href="/logos/tcs-favicon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles/tcs.css?v=20260902h">
+
+<style>
+.verify-wrap{max-width:720px;margin:0 auto;padding:72px 24px 96px}
+.verify-brand{display:inline-flex;align-items:baseline;text-decoration:none;margin-bottom:48px}
+.verify-eyebrow{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--orange);font-weight:600;margin-bottom:14px}
+.verify-title{font-family:'Angle','Cormorant Garamond',serif;font-size:clamp(30px,5vw,44px);font-weight:400;color:var(--cream);letter-spacing:-0.01em;margin:0 0 14px;line-height:1.1}
+.verify-sub{color:var(--grey-400);font-size:15px;line-height:1.7;font-weight:300;margin:0 0 32px}
+.verify-form{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:36px}
+.verify-form input{flex:1 1 240px;padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(235,100,30,0.28);border-radius:8px;color:var(--cream);font-family:'Poppins',sans-serif;font-size:15px;letter-spacing:0.04em;text-transform:uppercase}
+.verify-form input::placeholder{text-transform:none;letter-spacing:0;color:var(--grey-500)}
+.verify-form button{padding:14px 26px;border-radius:8px;border:1px solid var(--orange);background:var(--orange);color:#fff;font-family:'Poppins',sans-serif;font-size:13px;font-weight:600;letter-spacing:0.04em;cursor:pointer}
+.verify-form button:hover{filter:brightness(1.08)}
+.verify-card{border:1px solid rgba(235,100,30,0.35);border-radius:14px;padding:32px;background:rgba(255,255,255,0.02)}
+.verify-status{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;padding:7px 12px;border-radius:999px;margin-bottom:22px}
+.verify-status.ok{color:#5fd39a;background:rgba(95,211,154,0.1);border:1px solid rgba(95,211,154,0.35)}
+.verify-status.warn{color:var(--orange);background:rgba(235,100,30,0.1);border:1px solid rgba(235,100,30,0.4)}
+.verify-status.bad{color:#ff7b7b;background:rgba(255,123,123,0.08);border:1px solid rgba(255,123,123,0.35)}
+.verify-name{font-family:'Angle','Cormorant Garamond',serif;font-size:34px;color:var(--cream);margin:0 0 4px;line-height:1.1}
+.verify-level{font-size:15px;color:var(--orange);margin:0 0 26px}
+.verify-level em{font-style:italic;font-family:'Angle','Cormorant Garamond',serif;font-size:19px}
+.verify-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:18px 24px;margin:0 0 26px}
+.verify-grid div span{display:block;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--grey-500);margin-bottom:5px}
+.verify-grid div strong{font-weight:500;color:var(--cream);font-size:15px}
+.verify-note{font-size:13px;line-height:1.65;color:var(--grey-400);border-top:1px solid rgba(255,255,255,0.08);padding-top:18px;margin:0}
+.verify-note a{color:var(--orange);font-weight:500}
+.verify-foot{margin-top:56px;font-size:12px;color:var(--grey-500);line-height:1.7}
+.verify-foot a{color:var(--grey-400)}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+
+<main class="verify-wrap">
+ <a href="https://thecorestandard.co.uk/" class="verify-brand nav-brand" aria-label="The Core Standard home">
+ <span class="nav-brand-the">The</span><span class="nav-brand-core">Core</span><span class="nav-brand-rest">Standard</span><span style="color:var(--orange);font-family:'Angle',serif;font-size:1.35rem;">.</span>
+ </a>
+
+ <p class="verify-eyebrow">Certificate verification</p>
+ <h1 class="verify-title">Verify a Core Standard certificate<span style="color:var(--orange);">.</span></h1>
+ <p class="verify-sub">Every TCS Certified certificate carries a unique ID. Enter it below, or follow the verifier link on a candidate&rsquo;s digital badge, and we will confirm the name, level and issuing reviewer against our records.</p>
+
+ <form class="verify-form" id="verifyForm" autocomplete="off">
+ <label for="certId" style="position:absolute;left:-9999px;">Certificate ID</label>
+ <input id="certId" name="id" type="text" placeholder="Certificate ID, e.g. TCS-2026-A7K3PQ" maxlength="32" required>
+ <button type="submit">Verify &rarr;</button>
+ </form>
+
+ <section class="verify-card" id="result" hidden aria-live="polite">
+ <div class="verify-status" id="status"></div>
+ <p class="verify-name" id="rName"></p>
+ <p class="verify-level" id="rLevel"></p>
+ <div class="verify-grid">
+ <div><span>Overall band</span><strong id="rBand"></strong></div>
+ <div><span>Issued</span><strong id="rIssued"></strong></div>
+ <div><span>Issuing reviewer</span><strong id="rReviewer"></strong></div>
+ <div><span>Certificate ID</span><strong id="rId"></strong></div>
+ </div>
+ <p class="verify-note" id="rNote"></p>
+ </section>
+
+ <section class="verify-card" id="notFound" hidden aria-live="polite">
+ <div class="verify-status bad">Not found</div>
+ <p class="verify-name" style="font-size:26px;">No certificate matches that ID<span style="color:var(--orange);">.</span></p>
+ <p class="verify-note" id="nfNote">Check the ID against the certificate, including the hyphens. If it still does not match, the certificate was not issued by The Core Standard. Questions: <a href="mailto:hello@thecorestandard.co.uk?subject=Certificate%20verification">hello@thecorestandard.co.uk</a>.</p>
+ </section>
+
+ <p class="verify-foot">TCS Certified is the scenario-based assessment for Executive Assistants and PAs, expert-reviewed against a published standard. <a href="https://thecorestandard.co.uk/certified.html">About TCS Certified</a> &middot; <a href="https://thecorestandard.co.uk/tcs-certified-levels-explained.html">What the levels mean</a> &middot; <a href="https://thecorestandard.co.uk/">thecorestandard.co.uk</a><br>&copy; 2026 The Core Standard, a trading name of eavolve Ltd.</p>
+</main>
+
+<script>
+(function(){
+ var form=document.getElementById('verifyForm'), input=document.getElementById('certId');
+ var result=document.getElementById('result'), notFound=document.getElementById('notFound');
+ var LEVELS={1:'Operational EA',2:'EA to Senior Leadership',3:'Executive Business Partner'};
+ function esc(s){return String(s==null?'':s);}
+ function fmtDate(s){ if(!s) return ''; var d=new Date(s+'T00:00:00'); if(isNaN(d)) return esc(s); return d.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}); }
+ function idFromLocation(){
+  var q=new URLSearchParams(location.search).get('id'); if(q) return q;
+  var seg=location.pathname.split('/').filter(Boolean); var last=seg[seg.length-1]||'';
+  if(!last||/^(verify|index\.html)$/i.test(last)) return '';
+  return last;
+ }
+ function norm(id){ return String(id||'').trim().toUpperCase().replace(/[^A-Z0-9-]/g,''); }
+ function show(el){ result.hidden=true; notFound.hidden=true; if(el) el.hidden=false; }
+ function render(c){
+  var st=document.getElementById('status'); st.className='verify-status';
+  var status=(c.status||'issued').toLowerCase();
+  if(status==='revoked'){ st.classList.add('bad'); st.textContent='Revoked'; }
+  else if(status==='specimen'){ st.classList.add('warn'); st.textContent='Specimen certificate'; }
+  else { st.classList.add('ok'); st.textContent='Verified'; }
+  document.getElementById('rName').textContent=esc(c.name);
+  var lvlName=c.level||LEVELS[c.levelNumber]||'';
+  document.getElementById('rLevel').innerHTML=(c.levelNumber?('Level '+esc(c.levelNumber)+' &middot; '):'')+'<em>'+esc(lvlName).replace(/[<>&]/g,'')+'</em>';
+  document.getElementById('rBand').textContent=esc(c.band||'—');
+  document.getElementById('rIssued').textContent=fmtDate(c.issued);
+  document.getElementById('rReviewer').textContent=esc(c.reviewer);
+  document.getElementById('rId').textContent=esc(c.id);
+  var note=document.getElementById('rNote');
+  if(status==='revoked'){ note.textContent='This certificate has been withdrawn by The Core Standard and should not be relied on. '+esc(c.note||''); }
+  else if(status==='specimen'){ note.innerHTML='This is a specimen record used to show what a verified certificate looks like. It does not belong to a real candidate. <a href="https://thecorestandard.co.uk/certified.html">About TCS Certified</a>.'; }
+  else { note.innerHTML='This certificate was issued by The Core Standard after a scenario-based assessment scored against every level of the standard and signed off by the named reviewer. The level shown is the one the candidate demonstrated. <a href="https://thecorestandard.co.uk/tcs-certified-levels-explained.html">What the levels mean</a>.'; }
+  show(result);
+ }
+ function lookup(raw){
+  var id=norm(raw); if(!id) return;
+  input.value=id;
+  if(!/^[A-Z0-9-]{6,32}$/.test(id)){ show(notFound); return; }
+  fetch('/verify/certs/'+encodeURIComponent(id)+'.json',{cache:'no-store'})
+   .then(function(r){ if(!r.ok) throw 0; return r.json(); })
+   .then(function(c){ if(!c||norm(c.id)!==id) throw 0; render(c); })
+   .catch(function(){ show(notFound); });
+  try{ if(typeof gtag==='function') gtag('event','verify_lookup'); }catch(e){}
+ }
+ form.addEventListener('submit',function(e){ e.preventDefault(); lookup(input.value); });
+ var initial=idFromLocation(); if(initial) lookup(initial);
+})();
+</script>
+</body>
+</html>
