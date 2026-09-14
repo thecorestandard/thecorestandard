@@ -43,6 +43,14 @@
 
 <link rel="stylesheet" href="styles/tcs.css?v=20260902h">
 
+<style>
+.insight-filter{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;max-width:1100px;margin:0 auto;padding:8px 48px 0}
+.insight-filter button{font-family:Poppins,sans-serif;font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:10px 18px;border-radius:999px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.12);color:var(--grey-400);cursor:pointer;transition:all 0.25s}
+.insight-filter button:hover{border-color:rgba(235,100,30,0.4);color:var(--cream)}
+.insight-filter button.is-active{background:rgba(235,100,30,0.12);border-color:var(--orange);color:var(--orange)}
+.insight-card.is-hidden{display:none}
+@media(max-width:700px){.insight-filter{padding:8px 20px 0}}
+</style>
 </head>
 <body>
 
@@ -154,50 +162,74 @@
  </div>
  </section>
 
+ <div class="insight-filter" role="group" aria-label="Filter articles by audience">
+ <button type="button" class="is-active" data-filter="all" aria-pressed="true">All articles</button>
+ <button type="button" data-filter="employers" aria-pressed="false">For employers</button>
+ <button type="button" data-filter="candidates" aria-pressed="false">For candidates</button>
+ </div>
+
  <section class="insights-grid">
- <a class="insight-card" href="chief-of-staff-vs-executive-assistant.html">
+ <a class="insight-card" href="inbox-triage-what-reviewers-look-for.html" data-audience="candidates">
+ <div class="insight-tag">Candidate guide</div>
+ <h2>Inbox Triage: what the reviewer is actually looking for</h2>
+ <p>The first module of every assessment is a live inbox and a principal you cannot reach. How the reviewer reads what you do with it, what changes by level, and the three habits that cost a band.</p>
+ <div class="insight-meta"><span>7&nbsp;min read</span><span class="insight-meta-dot"></span><span>For candidates</span></div>
+ </a>
+ <a class="insight-card" href="how-to-use-your-recruiter-summary.html" data-audience="candidates">
+ <div class="insight-tag">Candidate guide</div>
+ <h2>How to use your Recruiter Summary: a recruiter&rsquo;s view</h2>
+ <p>One page, a band per pillar, three standout moves and a verdict. Where it belongs, where it does not, and how to talk about it, from a recruiter&rsquo;s side of the desk.</p>
+ <div class="insight-meta"><span>6&nbsp;min read</span><span class="insight-meta-dot"></span><span>For candidates</span></div>
+ </a>
+ <a class="insight-card" href="tcs-certified-levels-explained.html" data-audience="candidates">
+ <div class="insight-tag">Candidate guide</div>
+ <h2>The three Certified levels, explained</h2>
+ <p>Operational EA, EA to Senior Leadership, Executive Business Partner. What each means, what decides yours, and what to do when it is not the one on your business card.</p>
+ <div class="insight-meta"><span>7&nbsp;min read</span><span class="insight-meta-dot"></span><span>For candidates</span></div>
+ </a>
+ <a class="insight-card" href="chief-of-staff-vs-executive-assistant.html" data-audience="employers">
  <div class="insight-tag">Buyer guide</div>
  <h2>Chief of Staff or Executive Assistant: which one are you actually hiring?</h2>
  <p>The difference is remit, not seniority. An eight-question test for the role you are writing, and how to assess for each before you commit to the wrong one.</p>
  <div class="insight-meta"><span>7&nbsp;min read</span><span class="insight-meta-dot"></span><span>For employers</span></div>
  </a>
- <a class="insight-card" href="executive-assistant-in-tray-exercise.html">
+ <a class="insight-card" href="executive-assistant-in-tray-exercise.html" data-audience="employers">
  <div class="insight-tag">Buyer guide</div>
  <h2>The executive assistant in-tray exercise: what to set, and how to score it</h2>
  <p>Three tasks you can set this week, the time limits, and a five-pillar scoring sheet that stops you marking the candidate you already liked.</p>
  <div class="insight-meta"><span>8&nbsp;min read</span><span class="insight-meta-dot"></span><span>For employers</span></div>
  </a>
- <a class="insight-card" href="executive-assistant-interview-questions.html">
+ <a class="insight-card" href="executive-assistant-interview-questions.html" data-audience="employers">
  <div class="insight-tag">Buyer guide</div>
  <h2>Executive Assistant interview questions that actually work</h2>
  <p>The questions that reveal how a candidate thinks, with what a strong answer sounds like next to a weak one.</p>
  <div class="insight-meta"><span>6&nbsp;min read</span><span class="insight-meta-dot"></span><span>For employers</span></div>
  </a>
- <a class="insight-card" href="personal-assistant-test.html">
+ <a class="insight-card" href="personal-assistant-test.html" data-audience="employers">
  <div class="insight-tag">Buyer guide</div>
  <h2>The personal assistant test, and how to assess a PA</h2>
  <p>Office PA or private household PA: what a personal assistant assessment should measure, and how to run it.</p>
  <div class="insight-meta"><span>6&nbsp;min read</span><span class="insight-meta-dot"></span><span>For employers</span></div>
  </a>
- <a class="insight-card" href="how-to-test-an-executive-assistant.html">
+ <a class="insight-card" href="how-to-test-an-executive-assistant.html" data-audience="employers">
  <div class="insight-tag">Buyer guide</div>
  <h2>How to test an Executive Assistant before you hire</h2>
  <p>An interview shows how someone presents, not how they work. How to actually test an EA before you make an offer, and the three things to watch for.</p>
  <div class="insight-meta"><span>5&nbsp;min read</span><span class="insight-meta-dot"></span><span>For employers</span></div>
  </a>
- <a class="insight-card" href="how-to-hire-an-ea.html">
+ <a class="insight-card" href="how-to-hire-an-ea.html" data-audience="employers">
  <div class="insight-tag">Buyer guide</div>
  <h2>How to hire an Executive Assistant in 2026</h2>
  <p>Why CV-plus-interview stopped working, what&rsquo;s replacing it, and a modern process for hiring EAs that a busy operations lead can actually run.</p>
  <div class="insight-meta"><span>12&nbsp;min read</span><span class="insight-meta-dot"></span><span>For employers</span></div>
  </a>
- <a class="insight-card" href="what-makes-a-great-ea.html">
+ <a class="insight-card" href="what-makes-a-great-ea.html" data-audience="employers candidates">
  <div class="insight-tag">Methodology</div>
  <h2>What separates a great EA from an average one</h2>
  <p>The five pillars we score against, the behaviours that distinguish top-decile EAs, and the judgement calls that rarely make it onto a job description.</p>
  <div class="insight-meta"><span>10&nbsp;min read</span><span class="insight-meta-dot"></span><span>Experts &amp; employers</span></div>
  </a>
- <a class="insight-card" href="anatomy-of-a-tcs-report.html">
+ <a class="insight-card" href="anatomy-of-a-tcs-report.html" data-audience="employers candidates">
  <div class="insight-tag">Inside the report</div>
  <h2>Anatomy of a TCS report</h2>
  <p>A page-by-page walk-through of a real (anonymised) assessment report. What each score means, how to read a reviewer note, and how to action the result.</p>
@@ -215,6 +247,9 @@
  </div>
  </section>
 
+<script>
+(function(){var bar=document.querySelector(".insight-filter");if(!bar)return;var cards=document.querySelectorAll(".insight-card[data-audience]");function apply(f){cards.forEach(function(c){var a=(c.getAttribute("data-audience")||"").split(" ");c.classList.toggle("is-hidden",f!=="all"&&a.indexOf(f)===-1);});bar.querySelectorAll("button").forEach(function(b){var on=b.getAttribute("data-filter")===f;b.classList.toggle("is-active",on);b.setAttribute("aria-pressed",on?"true":"false");});}bar.addEventListener("click",function(e){var b=e.target.closest("button[data-filter]");if(!b)return;apply(b.getAttribute("data-filter"));try{history.replaceState(null,"",b.getAttribute("data-filter")==="all"?location.pathname:"#"+b.getAttribute("data-filter"));}catch(x){}});var h=(location.hash||"").replace("#","");if(h==="employers"||h==="candidates")apply(h);})();
+</script>
 </main>
 
 <script type="application/ld+json">
