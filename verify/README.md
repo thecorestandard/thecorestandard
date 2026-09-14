@@ -1,8 +1,8 @@
 # Certificate verifier
 
-Public page that confirms a TCS Certified certificate by its ID. Works at
-`https://thecorestandard.co.uk/verify/` today, and at
-`https://verify.thecorestandard.co.uk/` once the subdomain is attached (see below).
+Public page that confirms a TCS Certified certificate by its ID. The lookup form lives at
+`https://thecorestandard.co.uk/verify`. The subdomain `verify.thecorestandard.co.uk` is attached:
+its root redirects to that form, and `verify.thecorestandard.co.uk/<ID>` opens a certificate directly.
 
 Both of these resolve the same certificate:
 
@@ -47,10 +47,9 @@ Each certificate is its own file and Vercel does not list directories, so the on
 to reach a record is to know its ID. `TCS-SPECIMEN.json` is a demo record and is safe
 to leave in place.
 
-## Attaching the subdomain (one-off)
+## Subdomain (already attached, 14 September 2026)
 
-1. In Vercel, open the project, Settings, Domains, and add `verify.thecorestandard.co.uk`.
-2. At the DNS provider for thecorestandard.co.uk, add a CNAME record:
-   name `verify`, value `cname.vercel-dns.com`.
-3. Wait for Vercel to show the domain as valid. The rewrites in `vercel.json` already
-   route the subdomain to this page.
+`verify.thecorestandard.co.uk` is a domain on the Vercel project, with a GoDaddy CNAME
+`verify` pointing at Vercel. The redirect and rewrites in `vercel.json` route it to this page.
+If the domain ever needs re-adding, do it under Vercel, Settings, Domains, and use the CNAME
+value Vercel shows there.
