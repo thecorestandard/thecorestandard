@@ -74,7 +74,8 @@
  <p class="verify-name" id="rName"></p>
  <p class="verify-level" id="rLevel"></p>
  <div class="verify-grid">
- <div><span>Overall band</span><strong id="rBand"></strong></div>
+ <div id="rRatingWrap"><span>TCS rating</span><strong id="rRating"></strong></div>
+ <div id="rBandWrap"><span>Overall band</span><strong id="rBand"></strong></div>
  <div><span>Issued</span><strong id="rIssued"></strong></div>
  <div><span>Issuing reviewer</span><strong id="rReviewer"></strong></div>
  <div><span>Certificate ID</span><strong id="rId"></strong></div>
@@ -115,7 +116,9 @@
   document.getElementById('rName').textContent=esc(c.name);
   var lvlName=c.level||LEVELS[c.levelNumber]||'';
   document.getElementById('rLevel').innerHTML=(c.levelNumber?('Level '+esc(c.levelNumber)+' &middot; '):'')+'<em>'+esc(lvlName).replace(/[<>&]/g,'')+'</em>';
-  document.getElementById('rBand').textContent=esc(c.band||'—');
+  var bandWrap=document.getElementById('rBandWrap'), ratingWrap=document.getElementById('rRatingWrap');
+  bandWrap.hidden=!c.band; document.getElementById('rBand').textContent=esc(c.band);
+  var hasRating=(c.rating||c.rating===0); ratingWrap.hidden=!hasRating; document.getElementById('rRating').textContent=hasRating?(esc(c.rating)+' / 100'):'';
   document.getElementById('rIssued').textContent=fmtDate(c.issued);
   document.getElementById('rReviewer').textContent=esc(c.reviewer);
   document.getElementById('rId').textContent=esc(c.id);

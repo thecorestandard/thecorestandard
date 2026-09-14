@@ -35,7 +35,8 @@ Print the second form on certificates and badges.
   `"note"` field with the reason), or `specimen` (demo only).
 - `levelNumber` is 1, 2 or 3. `level` is the name: Operational EA, EA to Senior
   Leadership, Executive Business Partner.
-- `band`: Developing, Proficient, Strong, Distinctive or Exemplary.
+- `rating`: the overall score out of 100, shown as "TCS rating". Optional.
+- `band`: overall band, if one was issued. Optional; the page hides the field when absent.
 - `issued`: ISO date, `YYYY-MM-DD`.
 
 3. Commit and merge to `main`. Vercel publishes it within a minute.
