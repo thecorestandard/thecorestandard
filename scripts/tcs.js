@@ -518,7 +518,8 @@
 
   forms.forEach(function(form){
     var key = form.getAttribute('data-form') || 'form';
-    if (configured) form.setAttribute('action', endpoint);
+    var ep = form.getAttribute('data-endpoint') || endpoint;
+    if (configured) form.setAttribute('action', ep);
     form.setAttribute('method', 'POST');
     ensureHidden(form, 'form', key);
     ensureHidden(form, '_subject', 'TCS website: ' + key);
@@ -535,7 +536,7 @@
       var btn = form.querySelector('[type="submit"]');
       var orig = btn ? btn.innerHTML : '';
       if (btn){ btn.disabled = true; btn.innerHTML = 'Sending…'; }
-      fetch(endpoint, { method:'POST', body:new FormData(form), headers:{ 'Accept':'application/json' } })
+      fetch(ep, { method:'POST', body:new FormData(form), headers:{ 'Accept':'application/json' } })
         .then(function(r){
           if (r.ok){ succeed(form); return; }
           return r.json().then(function(d){
