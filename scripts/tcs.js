@@ -537,7 +537,7 @@
         'newsletter': 'TCS10 code sent to ' + who,
         'newsletter-insights': 'TCS10 code sent to ' + who,
         'ask': 'Contact form message from ' + who,
-        'partner': 'Recruiter partner enquiry from ' + who,
+        'partner': 'Partner application from ' + who,
         'register-interest': 'Register interest' + ((prodEl && prodEl.value) ? ' in ' + prodEl.value : '') + ' from ' + who,
         'notify-cos': 'Notify me: Chief of Staff, from ' + who,
         'notify-ea-manager': 'Notify me: EA Manager Edition, from ' + who
