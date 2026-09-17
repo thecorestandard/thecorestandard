@@ -528,6 +528,22 @@
 
     form.addEventListener('submit', function(e){
       e.preventDefault();
+      // Label the notification email so the hello@ inbox reads as a log of what was sent to whom.
+      var emailEl = form.querySelector('[name="email"]');
+      var who = (emailEl && emailEl.value) ? emailEl.value.trim() : 'unknown address';
+      var prodEl = form.querySelector('[name="product"]');
+      var labels = {
+        'methodology-download': 'Methodology PDF sent to ' + who,
+        'newsletter': 'TCS10 code sent to ' + who,
+        'newsletter-insights': 'TCS10 code sent to ' + who,
+        'ask': 'Contact form message from ' + who,
+        'partner': 'Recruiter partner enquiry from ' + who,
+        'register-interest': 'Register interest' + ((prodEl && prodEl.value) ? ' in ' + prodEl.value : '') + ' from ' + who,
+        'notify-cos': 'Notify me: Chief of Staff, from ' + who,
+        'notify-ea-manager': 'Notify me: EA Manager Edition, from ' + who
+      };
+      var subjEl = form.querySelector('[name="_subject"]');
+      if (subjEl) subjEl.value = labels[key] || ('TCS website: ' + key + ' from ' + who);
       if (form.querySelector('[name="_gotcha"]') && form.querySelector('[name="_gotcha"]').value) return; // bot
       if (!configured){
         message(form, 'This form isn’t connected yet. Please email <a href="mailto:hello@thecorestandard.co.uk" style="color:#EB641E;">hello@thecorestandard.co.uk</a> and we’ll help.', false);
