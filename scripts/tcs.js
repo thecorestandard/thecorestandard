@@ -48,7 +48,11 @@
       var expanded = hamburger.classList.contains('open');
       hamburger.setAttribute('aria-expanded', expanded ? 'true' : 'false');
     });
-    navLinks.querySelectorAll('a').forEach(function(link){
+    // Close the drawer when a real link is followed. Dropdown triggers
+    // (How It Works, Products) are skipped: on mobile their first tap only
+    // opens the accordion, and closing the drawer at the same time made
+    // the whole menu disappear before the user could tap through.
+    navLinks.querySelectorAll('a:not(.nav-dropdown-trigger)').forEach(function(link){
       link.addEventListener('click', function(){
         hamburger.classList.remove('open');
         navLinks.classList.remove('open');
