@@ -536,6 +536,8 @@
       var emailEl = form.querySelector('[name="email"]');
       var who = (emailEl && emailEl.value) ? emailEl.value.trim() : 'unknown address';
       var prodEl = form.querySelector('[name="product"]');
+      var roleEl = form.querySelector('[name="role"]');
+      var whereEl = form.querySelector('[name="where"]');
       var labels = {
         'methodology-download': 'Methodology PDF sent to ' + who,
         'newsletter': 'TCS10 code sent to ' + who,
@@ -543,7 +545,7 @@
         'ask': 'Contact form message from ' + who,
         'partner': 'Partner application from ' + who,
         'register-interest': 'Register interest' + ((prodEl && prodEl.value) ? ' in ' + prodEl.value : '') + ' from ' + who,
-        'notify-cos': 'Notify me: Chief of Staff, from ' + who,
+        'notify-cos': 'Notify me: Chief of Staff' + (roleEl && roleEl.value ? ' (' + roleEl.value + (whereEl && whereEl.value ? ', ' + whereEl.value : '') + ')' : '') + ', from ' + who,
         'notify-ea-manager': 'Notify me: EA Manager Edition, from ' + who
       };
       var subjEl = form.querySelector('[name="_subject"]');
