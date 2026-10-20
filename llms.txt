@@ -4,11 +4,12 @@
 
 Trading name of eavolve Ltd. Founders: Lily Shippen (specialist EA and PA recruiter, founder of Lily Shippen Recruitment and eavolve) and Emily Partridge (former C-suite Executive Assistant). Pricing is in pounds sterling; the business serves employers across the UK.
 
-Three employer levels: Operational EA (£495 +VAT), EA to Senior Leadership (£695 +VAT), Executive Business Partner (£995 +VAT). Candidate certification, TCS Certified, is £175 inc. VAT. Chief of Staff is a separate stream, in development. It is not a typing test, a multiple-choice quiz or a psychometric.
+Three employer levels: Operational EA (£495 +VAT), EA to Senior Leadership (£695 +VAT), Executive Business Partner (£995 +VAT). First Look is the entry assessment: one candidate, three modules in 30 minutes, reviewer-scored, £195 +VAT, deducted from a full assessment on the same candidate within 30 days. Candidate certification, TCS Certified, is £175 inc. VAT. Chief of Staff is a separate stream, in development. It is not a typing test, a multiple-choice quiz or a psychometric.
 
 ## Employers
 
 - [Executive assistant assessment for employers](https://thecorestandard.co.uk/ea-hire.html): the three levels, pricing and online commissioning
+- [First Look](https://thecorestandard.co.uk/first-look.html): the entry assessment, one candidate, three modules in 30 minutes, reviewer-scored, £195 +VAT, deducted from a full assessment
 - [How the assessment works](https://thecorestandard.co.uk/how-it-works.html): from commission to report, the modules in the simulated day
 - [Methodology](https://thecorestandard.co.uk/methodology.html): the five pillars, the rubric, reviewer calibration and bias safeguards
 - [Benchmark your team](https://thecorestandard.co.uk/benchmark-your-team.html): assess the EAs you already employ
