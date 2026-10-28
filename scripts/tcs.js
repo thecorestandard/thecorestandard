@@ -237,6 +237,7 @@
     'ppa_certified_l2':   null,
     'cos_certified':      null,
     // Employer-commissioned (EA Hire)
+    'ea_hire':            'https://buy.stripe.com/fZufZjdD8dUj4b29C02Ji0n',
     'ea_hire_operational':'https://buy.stripe.com/fZufZjdD8dUj4b29C02Ji0n',
     'ea_hire_director':   'https://buy.stripe.com/00w8wR9mS17x5f63dC2Ji0o',
     'ea_hire_csuite':     'https://buy.stripe.com/dRm4gBdD817xbDu3dC2Ji0p',
@@ -309,7 +310,7 @@
       + '<h2 id="tcsModalTitle">A few things to confirm.</h2>'
       + '<div class="tcs-modal-section"><h3>What you will receive</h3><ul id="tcsModalReceive"></ul></div>'
       + '<div class="tcs-modal-section"><h3>How the simulation works</h3><ul>'
-      + '<li>97 minutes for every candidate, whichever level the role needs, completed in one sitting</li>'
+      + '<li>97 minutes, completed in one sitting</li>'
       + '<li>Timed: the clock does not stop once it begins, and it cannot be paused and resumed</li>'
       + '<li>The assessment link is issued within the hour and expires 14 days after issue</li>'
       + '<li>Results delivered within 48 hours of submission</li>'
@@ -331,7 +332,7 @@
 
     // Employer purchases receive a hiring report; candidate (Certified) purchases own a credential.
     var RECEIVE_EMPLOYER = '<li>An independent, expert-reviewed report on your candidate: the level they demonstrated, scored on every pillar</li>'
-      + '<li>A clear recommendation against the level you named, plus notes on strengths, risk factors, and where to probe at the next stage</li>'
+      + '<li>A clear hire recommendation, plus notes on strengths, risk factors, and where to probe at the next stage</li>'
       + '<li>Delivered to your inbox within 48 hours of the candidate\u2019s submission</li>';
     var RECEIVE_CANDIDATE = '<li>A full expert-reviewed competency report, scored against every level of the standard</li>'
       + '<li>Your Recruiter Summary and verified digital badge</li>'
