@@ -309,7 +309,7 @@
       + '<h2 id="tcsModalTitle">A few things to confirm.</h2>'
       + '<div class="tcs-modal-section"><h3>What you will receive</h3><ul id="tcsModalReceive"></ul></div>'
       + '<div class="tcs-modal-section"><h3>How the simulation works</h3><ul>'
-      + '<li>Between 60 and 90 minutes, depending on the level, completed in one sitting</li>'
+      + '<li>97 minutes for every candidate, whichever level the role needs, completed in one sitting</li>'
       + '<li>Timed: the clock does not stop once it begins, and it cannot be paused and resumed</li>'
       + '<li>The assessment link is issued within the hour and expires 14 days after issue</li>'
       + '<li>Results delivered within 48 hours of submission</li>'
@@ -330,13 +330,13 @@
     var modalUpsell = document.getElementById('tcsModalUpsell');
 
     // Employer purchases receive a hiring report; candidate (Certified) purchases own a credential.
-    var RECEIVE_EMPLOYER = '<li>An independent, expert-reviewed competency report on your candidate, scored 0 to 100 across the four pillars</li>'
-      + '<li>A clear reviewer recommendation, plus notes on strengths, risk factors, and where to probe further</li>'
+    var RECEIVE_EMPLOYER = '<li>An independent, expert-reviewed report on your candidate: the level they demonstrated, scored on every pillar</li>'
+      + '<li>A clear recommendation against the level you named, plus notes on strengths, risk factors, and where to probe at the next stage</li>'
       + '<li>Delivered to your inbox within 48 hours of the candidate\u2019s submission</li>';
     var RECEIVE_CANDIDATE = '<li>A full expert-reviewed competency report, scored against every level of the standard</li>'
       + '<li>Your Recruiter Summary and verified digital badge</li>'
       + '<li>Your signed certificate, with a unique verifier URL employers can check</li>';
-    var RECEIVE_BENCHMARK = '<li>An expert-reviewed report on every EA you assess, scored 0 to 100 across the four pillars</li>'
+    var RECEIVE_BENCHMARK = '<li>An expert-reviewed report on every EA you assess, scored 0 to 100 across the five pillars</li>'
       + '<li>A team report tailored to you: the whole team on one benchmark, with where each person sits and where to develop next</li>'
       + '<li>A 30-minute debrief with Lily, and each EA’s own report to keep</li>';
 
